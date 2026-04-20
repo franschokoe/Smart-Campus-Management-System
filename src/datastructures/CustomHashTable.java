@@ -19,10 +19,7 @@ package datastructures;
  *   getAll()  — O(n)
  */
 public class CustomHashTable<K, V> {
-
-    // ─────────────────────────────────────────────
     //  Inner node class — forms the chain in each bucket
-    // ─────────────────────────────────────────────
     private static class Entry<K, V> {
         K key;
         V value;
@@ -35,33 +32,23 @@ public class CustomHashTable<K, V> {
         }
     }
 
-    // ─────────────────────────────────────────────
     //  Table internals
-    // ─────────────────────────────────────────────
     private Entry<K, V>[] buckets;   // array of chain heads
     private int           capacity;  // number of buckets
     private int           size;      // total number of key-value pairs
     private static final double LOAD_FACTOR = 0.75;
-
-    // ─────────────────────────────────────────────
     //  Constructors
-    // ─────────────────────────────────────────────
     @SuppressWarnings("unchecked")
     public CustomHashTable(int initialCapacity) {
         this.capacity = initialCapacity;
         this.buckets  = new Entry[capacity];
         this.size     = 0;
     }
-
     /** Default capacity of 16 buckets. */
     public CustomHashTable() {
         this(16);
     }
-
-    // ─────────────────────────────────────────────
     //  Hash function
-    // ─────────────────────────────────────────────
-
     /**
      * Maps a key to a bucket index.
      * Uses Java's built-in hashCode() on the key, then takes the
@@ -77,11 +64,7 @@ public class CustomHashTable<K, V> {
         if (h == Integer.MIN_VALUE) h = 0;
         return Math.abs(h) % capacity;
     }
-
-    // ─────────────────────────────────────────────
     //  Core operations
-    // ─────────────────────────────────────────────
-
     /**
      * Inserts or updates a key-value pair.
      * If the key already exists, its value is overwritten.
@@ -174,11 +157,7 @@ public class CustomHashTable<K, V> {
      * Returns true if the table is empty.
      */
     public boolean isEmpty() { return size == 0; }
-
-    // ─────────────────────────────────────────────
     //  Retrieval helpers
-    // ─────────────────────────────────────────────
-
     /**
      * Returns all values in the table as a plain Object array.
      * Used by StudentRegistry to iterate over every student.
@@ -216,9 +195,7 @@ public class CustomHashTable<K, V> {
         return (K[]) result;
     }
 
-    // ─────────────────────────────────────────────
     //  Resize (rehash)
-    // ─────────────────────────────────────────────
 
     /**
      * Doubles the capacity and rehashes all existing entries.
@@ -243,10 +220,8 @@ public class CustomHashTable<K, V> {
         }
     }
 
-    // ─────────────────────────────────────────────
-    //  Debug
-    // ─────────────────────────────────────────────
 
+    //  Debug
     /** Prints internal bucket structure — useful during testing. */
     public void printInternalState() {
         System.out.println("\n  [HashTable Debug — capacity=" + capacity + ", size=" + size + "]");

@@ -2,35 +2,25 @@ package models;
 
 /**
  * Represents a student in the Smart Campus system.
- * This is the data object stored inside the custom hash table.
+ * stored inside the custom hash table.
  */
+
 public class Student {
 
-    // ─────────────────────────────────────────────
     //  Fields
-    // ─────────────────────────────────────────────
-    private String studentId;      // Primary key — used as hash key
+    private String studentId;      //used as hash key
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
-    private String programme;      // e.g. BSc Computer Science
+    private String programme;      // course
     private int    yearOfStudy;    // 1 to 4
     private double gpa;
     private String status;         // Active | Suspended | Graduated
 
-    // ─────────────────────────────────────────────
     //  Constructor
-    // ─────────────────────────────────────────────
-    public Student(String studentId,
-                   String firstName,
-                   String lastName,
-                   String email,
-                   String phoneNumber,
-                   String programme,
-                   int    yearOfStudy,
-                   double gpa,
-                   String status) {
+    public Student(String studentId, String firstName, String lastName, String email, String phoneNumber,
+                   String programme, int    yearOfStudy, double gpa, String status) {
         this.studentId   = studentId;
         this.firstName   = firstName;
         this.lastName    = lastName;
@@ -41,10 +31,7 @@ public class Student {
         this.gpa         = gpa;
         this.status      = status;
     }
-
-    // ─────────────────────────────────────────────
     //  Getters
-    // ─────────────────────────────────────────────
     public String getStudentId()   { return studentId;   }
     public String getFirstName()   { return firstName;   }
     public String getLastName()    { return lastName;    }
@@ -56,9 +43,7 @@ public class Student {
     public double getGpa()         { return gpa;         }
     public String getStatus()      { return status;      }
 
-    // ─────────────────────────────────────────────
     //  Setters  (only mutable fields)
-    // ─────────────────────────────────────────────
     public void setEmail(String email)             { this.email = email;             }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     public void setProgramme(String programme)     { this.programme = programme;     }
@@ -66,23 +51,20 @@ public class Student {
     public void setGpa(double gpa)                 { this.gpa = gpa;                 }
     public void setStatus(String status)           { this.status = status;           }
 
-    // ─────────────────────────────────────────────
     //  Display
-    // ─────────────────────────────────────────────
-
-    /** Prints a formatted profile card for this student. */
+    /** Prints a formatted profile card  */
     public void display() {
         String line = "-".repeat(50);
         System.out.println("\n" + line);
         System.out.println("  STUDENT PROFILE");
         System.out.println(line);
-        System.out.printf("  %-18s: %s%n", "Student ID",   studentId);
+        System.out.printf("  %-18s: %s%n", "Student Number",   studentId);
         System.out.printf("  %-18s: %s%n", "Full Name",    getFullName());
         System.out.printf("  %-18s: %s%n", "Email",        email);
         System.out.printf("  %-18s: %s%n", "Phone",        phoneNumber);
         System.out.printf("  %-18s: %s%n", "Programme",    programme);
         System.out.printf("  %-18s: Year %d%n", "Year of Study", yearOfStudy);
-        System.out.printf("  %-18s: %.2f%n", "GPA",        gpa);
+        System.out.printf("  %-18s: %.2f%n", "Average",        gpa);
         System.out.printf("  %-18s: %s%n", "Status",       status);
         System.out.println(line);
     }
