@@ -79,9 +79,7 @@ public class Menu {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
-    //  ADMIN LOGIN
-    // ═════════════════════════════════════════════
+    //  ADMIN LOGIN & PASSWORD CHECKINGS
     private static void handleAdminLogin() {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  ADMINISTRATOR LOGIN");
@@ -90,17 +88,17 @@ public class Menu {
         String password = scanner.nextLine().trim();
 
         if (password.equals(ADMIN_PASSWORD)) {
-            printSuccess("Access granted. Welcome, Administrator!");
+            printSuccess("Access granted. Welcome Administrator!");
+            //Call admin menu to run
             adminMenu();
         } else {
             printError("Incorrect password. Access denied.");
         }
     }
 
-    // ─────────────────────────────────────────────
     //  ADMIN MENU
-    // ─────────────────────────────────────────────
     private static void adminMenu() {
+
         boolean loggedIn = true;
 
         while (loggedIn) {
@@ -134,14 +132,12 @@ public class Menu {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  STUDENT LOGIN
-    // ═════════════════════════════════════════════
     private static void handleStudentLogin() {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  STUDENT LOGIN");
         System.out.println(THIN_BORDER);
-        System.out.print("  Enter your Student ID: ");
+        System.out.print("  Enter your Student Number: ");
         String studentId = scanner.nextLine().trim();
 
 //        if (studentRegistry.studentExists(studentId)) {
@@ -152,16 +148,14 @@ public class Menu {
 //        }
     }
 
-    // ─────────────────────────────────────────────
     //  STUDENT MENU
-    // ─────────────────────────────────────────────
     private static void studentMenu(String studentId) {
         boolean loggedIn = true;
 
         while (loggedIn) {
             System.out.println("\n" + BORDER);
             System.out.println("              STUDENT MENU");
-            System.out.println("              ID: " + studentId);
+            System.out.println("              Student No.: " + studentId);
             System.out.println(THIN_BORDER);
             System.out.println("  1. View My Profile");
             System.out.println("  2. Course Registration");
@@ -190,13 +184,8 @@ public class Menu {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  MODULE MENUS
-    // ═════════════════════════════════════════════
-
-    // ─────────────────────────────────────────────
-    //  1. STUDENT RECORDS (Admin only)
-    // ─────────────────────────────────────────────
+    //  STUDENT RECORDS -- Admin only
     private static void studentRecordsMenu(boolean isAdmin) {
         boolean active = true;
 
@@ -231,9 +220,7 @@ public class Menu {
         }
     }
 
-    // ─────────────────────────────────────────────
-    //  2. COURSE REGISTRATION
-    // ─────────────────────────────────────────────
+    //  COURSE REGISTRATION
     private static void courseRegistrationMenu(boolean isAdmin) {
         boolean active = true;
 
@@ -259,7 +246,9 @@ public class Menu {
             System.out.println(BORDER);
             int choice = readInt("Enter choice: ");
 
+            //Commented some CourseRgistration
             if (isAdmin) {
+
 //                switch (choice) {
 //                    case 1 -> courseRegistration.addCourse(scanner);
 //                    case 2 -> courseRegistration.removeCourse(scanner);
@@ -281,9 +270,7 @@ public class Menu {
         }
     }
 
-    // ─────────────────────────────────────────────
-    //  3. LIBRARY MANAGEMENT
-    // ─────────────────────────────────────────────
+    //  LIBRARY MANAGEMENT
     private static void libraryMenu(boolean isAdmin) {
         boolean active = true;
 
@@ -293,6 +280,7 @@ public class Menu {
             System.out.println(THIN_BORDER);
 
             if (isAdmin) {
+                //Admin Adding a book
                 System.out.println("  1. Add Book");
                 System.out.println("  2. Remove Book");
                 System.out.println("  3. Search Book");
@@ -300,6 +288,7 @@ public class Menu {
                 System.out.println("  5. View Borrowed Books");
                 System.out.println("  6. Back");
             } else {
+                //Student seArching the book but not allowed to add or delete the book
                 System.out.println("  1. Search Book");
                 System.out.println("  2. Borrow Book");
                 System.out.println("  3. Return Book");
@@ -333,9 +322,7 @@ public class Menu {
         }
     }
 
-    // ─────────────────────────────────────────────
-    //  4. HOSTEL ALLOCATION
-    // ─────────────────────────────────────────────
+    //  HOSTEL ALLOCATION
     private static void hostelMenu(boolean isAdmin) {
         boolean active = true;
 
@@ -345,6 +332,7 @@ public class Menu {
             System.out.println(THIN_BORDER);
 
             if (isAdmin) {
+                //admin prevalegise
                 System.out.println("  1. Add Room");
                 System.out.println("  2. Allocate Room to Student");
                 System.out.println("  3. Deallocate Room");
@@ -352,6 +340,7 @@ public class Menu {
                 System.out.println("  5. View Waiting Queue");
                 System.out.println("  6. Back");
             } else {
+                //Sudent access only
                 System.out.println("  1. Check Room Availability");
                 System.out.println("  2. Apply for Hostel");
                 System.out.println("  3. Check My Allocation");
@@ -383,9 +372,7 @@ public class Menu {
         }
     }
 
-    // ─────────────────────────────────────────────
-    //  5. HELP DESK
-    // ─────────────────────────────────────────────
+    //  HELP DESK
     private static void helpDeskMenu(boolean isAdmin) {
         boolean active = true;
 
@@ -408,7 +395,7 @@ public class Menu {
 
             System.out.println(BORDER);
             int choice = readInt("Enter choice: ");
-
+            //Un commenting after implementing the helpDesk
             if (isAdmin) {
 //                switch (choice) {
 //                    case 1 -> helpDesk.processNextTicket();
@@ -429,9 +416,7 @@ public class Menu {
         }
     }
 
-    // ─────────────────────────────────────────────
     //  6. EVENT BOOKINGS
-    // ─────────────────────────────────────────────
     private static void eventBookingMenu(boolean isAdmin) {
         boolean active = true;
 
@@ -479,10 +464,7 @@ public class Menu {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  UTILITY METHODS
-    // ═════════════════════════════════════════════
-
     /**
      * Safely reads an integer from the console.
      * Handles non-numeric input gracefully without crashing.
