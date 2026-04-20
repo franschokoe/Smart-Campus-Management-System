@@ -14,12 +14,11 @@ public class Menu {
     private static final String BORDER         = "=".repeat(50);
     private static final String THIN_BORDER    = "-".repeat(50);
 
-    // ─────────────────────────────────────────────
-    //  Shared scanner (passed down to all modules)
-    // ─────────────────────────────────────────────
+
+    //  Shared scanner
     private static final Scanner scanner = new Scanner(System.in);
 
-//to be continiued
+    //to be continiued
 
     private static final StudentRegistry   studentRegistry   = new StudentRegistry();
 //    private static final CourseRegistration courseRegistration = new CourseRegistration();
@@ -28,13 +27,11 @@ public class Menu {
 //    private static final HelpDesk          helpDesk          = new HelpDesk();
 //    private static final EventBooking      eventBooking      = new EventBooking();
 
-    // ═════════════════════════════════════════════
-    //  ENTRY POINT
-    // ═════════════════════════════════════════════
     public static void main(String[] args) {
         printWelcomeBanner();
 
         boolean running = true;
+
         while (running) {
             printMainMenu();
             int choice = readInt("Enter choice: ");
@@ -46,26 +43,24 @@ public class Menu {
                     running = false;
                     printGoodbye();
                 }
-                default -> printError("Invalid option. Please choose 1, 2, or 3.");
+                default -> printError("Invalid option. Choose 1, 2, or 3.");
             }
         }
 
         scanner.close();
     }
 
-    // ═════════════════════════════════════════════
-    //  WELCOME / GOODBYE BANNERS
-    // ═════════════════════════════════════════════
+    //welcome banner
     private static void printWelcomeBanner() {
         System.out.println("\n" + BORDER);
         System.out.println("      SMART CAMPUS MANAGEMENT SYSTEM");
-        System.out.println("         University of Technology");
+        System.out.println("         University of Limpopo");
         System.out.println(BORDER);
         System.out.println("  Managing Students | Courses | Library");
         System.out.println("  Hostels | Help Desk | Events");
         System.out.println(BORDER + "\n");
     }
-
+    //Bye
     private static void printGoodbye() {
         System.out.println("\n" + BORDER);
         System.out.println("  Thank you for using Smart Campus System.");
@@ -73,9 +68,7 @@ public class Menu {
         System.out.println(BORDER + "\n");
     }
 
-    // ═════════════════════════════════════════════
     //  MAIN MENU
-    // ═════════════════════════════════════════════
     private static void printMainMenu() {
         System.out.println("\n" + BORDER);
         System.out.println("              MAIN MENU");
