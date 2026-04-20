@@ -30,22 +30,18 @@ import java.util.Scanner;
  */
 public class StudentRegistry {
 
-    // ─────────────────────────────────────────────
     //  Storage — custom hash table
-    // ─────────────────────────────────────────────
     private final CustomHashTable<String, Student> table;
 
     private static final String BORDER      = "=".repeat(50);
     private static final String THIN_BORDER = "-".repeat(50);
-
-    // ─────────────────────────────────────────────
-    //  Constructor — seeds a few demo students
-    // ─────────────────────────────────────────────
+    //  Constructor — seeds a few demo
     public StudentRegistry() {
         table = new CustomHashTable<>(16);
         seedDemoData();
     }
-
+    // HARD CODED RECORDS OF STUDENTS
+    // TO BE REMOVED OR COMMENTED ILL HEAR YOU GROUPMATES
     private void seedDemoData() {
         table.put("S001", new Student("S001", "Thabo",   "Nkosi",    "thabo@campus.ac.za",   "0712345678", "BSc Computer Science",  2, 3.5, "Active"));
         table.put("S002", new Student("S002", "Lerato",  "Dlamini",  "lerato@campus.ac.za",  "0823456789", "BCom Accounting",       1, 3.8, "Active"));
@@ -53,19 +49,16 @@ public class StudentRegistry {
         table.put("S004", new Student("S004", "Nomsa",   "Zulu",     "nomsa@campus.ac.za",   "0745678901", "BA Psychology",         4, 2.9, "Active"));
         table.put("S005", new Student("S005", "Kagiso",  "Sithole",  "kagiso@campus.ac.za",  "0856789012", "BSc Computer Science",  1, 3.6, "Active"));
     }
-
-    // ═════════════════════════════════════════════
     //  ADD STUDENT
-    // ═════════════════════════════════════════════
     public void addStudent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  ADD NEW STUDENT");
         System.out.println(THIN_BORDER);
 
-        String id = prompt(scanner, "Student ID (e.g. S006)").toUpperCase();
+        String id = prompt(scanner, "Student Number: ").toUpperCase();
 
         if (table.containsKey(id)) {
-            printError("Student ID '" + id + "' already exists.");
+            printError("Student Number '" + id + "' already exists.");
             return;
         }
 
@@ -88,8 +81,8 @@ public class StudentRegistry {
         double gpa = -1;
         while (gpa < 0.0 || gpa > 4.0) {
             try {
-                gpa = Double.parseDouble(prompt(scanner, "GPA (0.0 - 4.0)"));
-                if (gpa < 0.0 || gpa > 4.0) printError("GPA must be between 0.0 and 4.0.");
+                gpa = Double.parseDouble(prompt(scanner, "Average (0.0 - 4.0)"));
+                if (gpa < 0.0 || gpa > 4.0) printError("Average must be between 0.0 and 4.0.");
             } catch (NumberFormatException e) {
                 printError("Please enter a valid number.");
             }
@@ -99,18 +92,16 @@ public class StudentRegistry {
                                       phone, programme, year, gpa, "Active");
         table.put(id, student);
 
-        printSuccess("Student '" + student.getFullName() + "' registered with ID: " + id);
+        printSuccess("Student '" + student.getFullName() + "' registered with Student number: " + id);
         student.display();
     }
 
-    // ═════════════════════════════════════════════
     //  SEARCH STUDENT
-    // ═════════════════════════════════════════════
     public void searchStudent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  SEARCH STUDENT");
         System.out.println(THIN_BORDER);
-        System.out.println("  1. Search by Student ID");
+        System.out.println("  1. Search by Student Number");
         System.out.println("  2. Search by Name");
         System.out.println(THIN_BORDER);
 
@@ -124,11 +115,11 @@ public class StudentRegistry {
     }
 
     private void searchById(Scanner scanner) {
-        String id = prompt(scanner, "Enter Student ID").toUpperCase();
+        String id = prompt(scanner, "Enter Student Number").toUpperCase();
         Student s = table.get(id);
 
         if (s == null) {
-            printError("No student found with ID '" + id + "'.");
+            printError("No student found with student number '" + id + "'.");
         } else {
             s.display();
         }
@@ -142,7 +133,7 @@ public class StudentRegistry {
 
         System.out.println("\n" + THIN_BORDER);
         System.out.printf("  %-10s %-22s %-30s %-8s %s%n",
-                "ID", "Full Name", "Email", "Status", "Year");
+                "Student No.", "Full Name", "Email", "Status", "Year");
         System.out.println(THIN_BORDER);
 
         for (Object obj : values) {
@@ -161,25 +152,22 @@ public class StudentRegistry {
             System.out.println(THIN_BORDER);
         }
     }
-
-    // ═════════════════════════════════════════════
     //  DELETE STUDENT
-    // ═════════════════════════════════════════════
     public void deleteStudent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  DELETE STUDENT");
         System.out.println(THIN_BORDER);
 
-        String id = prompt(scanner, "Enter Student ID to delete").toUpperCase();
+        String id = prompt(scanner, "Enter Student Number to delete").toUpperCase();
         Student s = table.get(id);
 
         if (s == null) {
-            printError("Student ID '" + id + "' not found.");
+            printError("Student No. '" + id + "' not found.");
             return;
         }
 
         s.display();
-        String confirm = prompt(scanner, "Confirm delete? This cannot be undone. (yes/no)");
+        String confirm = prompt(scanner, "Confirm delete? This cannot be undone. (yes/no)").toLowerCase();
 
         if (confirm.equalsIgnoreCase("yes")) {
             table.remove(id);
@@ -189,19 +177,17 @@ public class StudentRegistry {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  UPDATE STUDENT
-    // ═════════════════════════════════════════════
     public void updateStudent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  UPDATE STUDENT");
         System.out.println(THIN_BORDER);
 
-        String id = prompt(scanner, "Enter Student ID to update").toUpperCase();
+        String id = prompt(scanner, "Enter Student Number to update").toUpperCase();
         Student s = table.get(id);
 
         if (s == null) {
-            printError("Student ID '" + id + "' not found.");
+            printError("Student Number '" + id + "' not found.");
             return;
         }
 
@@ -212,7 +198,7 @@ public class StudentRegistry {
         System.out.println("  2. Phone Number");
         System.out.println("  3. Programme");
         System.out.println("  4. Year of Study");
-        System.out.println("  5. GPA");
+        System.out.println("  5. Average");
         System.out.println("  6. Status (Active / Suspended / Graduated)");
         System.out.println(THIN_BORDER);
 
@@ -246,12 +232,12 @@ public class StudentRegistry {
             }
             case "5" -> {
                 try {
-                    double gpa = Double.parseDouble(prompt(scanner, "New GPA (0.0 - 4.0)"));
+                    double gpa = Double.parseDouble(prompt(scanner, "New Average (0.0 - 4.0)"));
                     if (gpa >= 0.0 && gpa <= 4.0) {
                         s.setGpa(gpa);
-                        printSuccess("GPA updated.");
+                        printSuccess("Average updated.");
                     } else {
-                        printError("GPA must be between 0.0 and 4.0.");
+                        printError("Average must be between 0.0 and 4.0.");
                     }
                 } catch (NumberFormatException e) {
                     printError("Invalid number entered.");
@@ -270,9 +256,7 @@ public class StudentRegistry {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY ALL STUDENTS
-    // ═════════════════════════════════════════════
     public void displayAllStudents() {
         if (table.isEmpty()) {
             printError("No students registered yet.");
@@ -285,7 +269,7 @@ public class StudentRegistry {
         System.out.println("  ALL REGISTERED STUDENTS  (" + table.size() + " total)");
         System.out.println(BORDER);
         System.out.printf("  %-10s %-22s %-30s %-12s %s%n",
-                "ID", "Full Name", "Email", "Status", "Year");
+                "Student No.", "Full Name", "Email", "Status", "Year");
         System.out.println(THIN_BORDER);
 
         for (Object obj : values) {
@@ -298,9 +282,8 @@ public class StudentRegistry {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY SINGLE STUDENT (student-facing)
-    // ═════════════════════════════════════════════
+
     public void displayStudent(String studentId) {
         Student s = table.get(studentId);
         if (s != null) {
@@ -310,9 +293,7 @@ public class StudentRegistry {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  STATISTICS (admin)
-    // ═════════════════════════════════════════════
     public void displayStatistics() {
         if (table.isEmpty()) {
             printError("No student data available.");
@@ -360,9 +341,7 @@ public class StudentRegistry {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  HELPERS USED BY Main.java
-    // ═════════════════════════════════════════════
 
     /** Returns true if a student with this ID exists — used for login validation. */
     public boolean studentExists(String studentId) {
@@ -375,9 +354,7 @@ public class StudentRegistry {
         return (s != null) ? s.getFullName() : "Unknown";
     }
 
-    // ─────────────────────────────────────────────
     //  Private utility methods
-    // ─────────────────────────────────────────────
     private String prompt(Scanner scanner, String label) {
         System.out.print("  " + label + ": ");
         return scanner.nextLine().trim();
