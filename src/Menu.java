@@ -416,7 +416,7 @@ public class Menu {
         }
     }
 
-    //  6. EVENT BOOKINGS
+    //  EVENT BOOKINGS
     private static void eventBookingMenu(boolean isAdmin) {
         boolean active = true;
 
@@ -483,11 +483,11 @@ public class Menu {
 
     /** Prints a green-style success message. */
     private static void printSuccess(String message) {
-        System.out.println("\n  ✔ " + message);
+        System.out.println("\n  Success: " + message);
     }
 
     /** Prints a red-style error message. */
     private static void printError(String message) {
-        System.out.println("\n  ✘ ERROR: " + message);
+        System.out.println("\n  Error: " + message);
     }
 }
