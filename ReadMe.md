@@ -1,4 +1,4 @@
-# 🎓 Smart Campus Management System (Java)
+# Smart Campus Management System (Java)
 
 ## Summary
 The Smart Campus Management System is a Java-based console application designed to simulate how modern universities manage and process large volumes of campus data efficiently.
@@ -78,7 +78,7 @@ git clone https://github.com/franschokoe/Smart-Campus-Management-System.git
 ## Project Structure
 ```text
 src/
-├── Main.java                
+├── Menu.java                
 │
 ├── models/
 │   ├── Student.java
