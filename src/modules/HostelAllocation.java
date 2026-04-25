@@ -75,27 +75,27 @@ public class HostelAllocation {
 
     private void seedDemoData() {
         // ── Block A — Single rooms ──────────────────────────────
-        addRoomInternal(new Room("A101", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
-        addRoomInternal(new Room("A102", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
-        addRoomInternal(new Room("A103", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
-        addRoomInternal(new Room("A201", "Block A", "Single", 2, 2700.00, "Wi-Fi, Desk, Wardrobe, En-suite"));
-        addRoomInternal(new Room("A202", "Block A", "Single", 2, 2700.00, "Wi-Fi, Desk, Wardrobe, En-suite"));
+//        addRoomInternal(new Room("A101", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
+//        addRoomInternal(new Room("A102", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
+//        addRoomInternal(new Room("A103", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
+//        addRoomInternal(new Room("A201", "Block A", "Single", 2, 2700.00, "Wi-Fi, Desk, Wardrobe, En-suite"));
+//        addRoomInternal(new Room("A202", "Block A", "Single", 2, 2700.00, "Wi-Fi, Desk, Wardrobe, En-suite"));
 
         // ── Block B — Double rooms ──────────────────────────────
-        addRoomInternal(new Room("B101", "Block B", "Double", 1, 1800.00, "Wi-Fi, Shared Bathroom"));
-        addRoomInternal(new Room("B102", "Block B", "Double", 1, 1800.00, "Wi-Fi, Shared Bathroom"));
-        addRoomInternal(new Room("B201", "Block B", "Double", 2, 2000.00, "Wi-Fi, Air-Con, Shared Bathroom"));
-        addRoomInternal(new Room("B202", "Block B", "Double", 2, 2000.00, "Wi-Fi, Air-Con, Shared Bathroom"));
+//        addRoomInternal(new Room("B101", "Block B", "Double", 1, 1800.00, "Wi-Fi, Shared Bathroom"));
+//        addRoomInternal(new Room("B102", "Block B", "Double", 1, 1800.00, "Wi-Fi, Shared Bathroom"));
+//        addRoomInternal(new Room("B201", "Block B", "Double", 2, 2000.00, "Wi-Fi, Air-Con, Shared Bathroom"));
+//        addRoomInternal(new Room("B202", "Block B", "Double", 2, 2000.00, "Wi-Fi, Air-Con, Shared Bathroom"));
 
         // ── Block C — Triple rooms ──────────────────────────────
-        addRoomInternal(new Room("C101", "Block C", "Triple", 1, 1200.00, "Wi-Fi, Shared Bathroom, Common Room"));
-        addRoomInternal(new Room("C102", "Block C", "Triple", 1, 1200.00, "Wi-Fi, Shared Bathroom, Common Room"));
-        addRoomInternal(new Room("C201", "Block C", "Triple", 2, 1400.00, "Wi-Fi, Air-Con, Shared Bathroom"));
+//        addRoomInternal(new Room("C101", "Block C", "Triple", 1, 1200.00, "Wi-Fi, Shared Bathroom, Common Room"));
+//        addRoomInternal(new Room("C102", "Block C", "Triple", 1, 1200.00, "Wi-Fi, Shared Bathroom, Common Room"));
+//        addRoomInternal(new Room("C201", "Block C", "Triple", 2, 1400.00, "Wi-Fi, Air-Con, Shared Bathroom"));
 
         // ── Pre-allocate some rooms to seed students ─────────────
-        allocateInternal("A101", "S001", "Thabo Nkosi");
-        allocateInternal("B101", "S002", "Lerato Dlamini");
-        allocateInternal("A201", "S003", "Sipho Mokoena");
+//        allocateInternal("A101", "S001", "Thabo Nkosi");
+//        allocateInternal("B101", "S002", "Lerato Dlamini");
+//        allocateInternal("A201", "S003", "Sipho Mokoena");
 
         // ── Seed waiting queue ───────────────────────────────────
         waitingQueue.enqueue("S004");

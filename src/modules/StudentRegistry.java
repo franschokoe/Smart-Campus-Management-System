@@ -43,11 +43,22 @@ public class StudentRegistry {
     // HARD CODED RECORDS OF STUDENTS
     // TO BE REMOVED OR COMMENTED ILL HEAR YOU GROUPMATES
     private void seedDemoData() {
-        table.put("S001", new Student("S001", "Thabo",   "Nkosi",    "thabo@campus.ac.za",   "0712345678", "BSc Computer Science",  2, 3.5, "Active"));
-        table.put("S002", new Student("S002", "Lerato",  "Dlamini",  "lerato@campus.ac.za",  "0823456789", "BCom Accounting",       1, 3.8, "Active"));
-        table.put("S003", new Student("S003", "Sipho",   "Mokoena",  "sipho@campus.ac.za",   "0634567890", "BEng Civil",            3, 3.2, "Active"));
-        table.put("S004", new Student("S004", "Nomsa",   "Zulu",     "nomsa@campus.ac.za",   "0745678901", "BA Psychology",         4, 2.9, "Active"));
-        table.put("S005", new Student("S005", "Kagiso",  "Sithole",  "kagiso@campus.ac.za",  "0856789012", "BSc Computer Science",  1, 3.6, "Active"));
+        table.put("240036190", new Student( "240036190",
+                                        "Kgodiso",
+                                        "Matlala",
+                                        "kgodiso@ul.ac.za",
+                                        "0712345678",
+                                        "BSc Computer Science",
+                                        2, 3.5,
+                                        "Active"));
+        table.put("202335158", new Student("202335158",
+                                            "Moyahabo ",
+                                            "Mooka",
+                                            "202335158@ul.ac.za",
+                                            "0856789012",
+                                            "BSc Computer Science",
+                                            2, 4.0,
+                                            "Active"));
     }
     //  ADD STUDENT
     public void addStudent(Scanner scanner) {
@@ -55,15 +66,15 @@ public class StudentRegistry {
         System.out.println("  ADD NEW STUDENT");
         System.out.println(THIN_BORDER);
 
-        String id = prompt(scanner, "Student Number: ").toUpperCase();
+        String id = String.valueOf(Integer.parseInt(prompt(scanner, "Student Number")));
 
         if (table.containsKey(id)) {
             printError("Student Number '" + id + "' already exists.");
             return;
         }
 
-        String firstName = prompt(scanner, "First Name");
-        String lastName  = prompt(scanner, "Last Name");
+        String firstName = prompt(scanner, "Full Name");
+        String lastName  = prompt(scanner, "Surname");
         String email     = prompt(scanner, "Email Address");
         String phone     = prompt(scanner, "Phone Number");
         String programme = prompt(scanner, "Programme (e.g. BSc Computer Science)");
