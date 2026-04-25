@@ -4,7 +4,7 @@ import modules.CourseRegistration;
 //import modules.LibrarySystem;
 //import modules.HostelAllocation;
 //import modules.HelpDesk;
-//import modules.EventBooking;
+import modules.EventBooking;
 
 import java.util.Scanner;
 
