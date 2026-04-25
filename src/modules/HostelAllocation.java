@@ -75,7 +75,7 @@ public class HostelAllocation {
 
     private void seedDemoData() {
         // ── Block A — Single rooms ──────────────────────────────
-//        addRoomInternal(new Room("A101", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
+        addRoomInternal(new Room("A101", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
 //        addRoomInternal(new Room("A102", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
 //        addRoomInternal(new Room("A103", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
 //        addRoomInternal(new Room("A201", "Block A", "Single", 2, 2700.00, "Wi-Fi, Desk, Wardrobe, En-suite"));

@@ -140,12 +140,12 @@ public class Menu {
         System.out.print("  Enter your Student Number: ");
         String studentId = scanner.nextLine().trim();
 
-//        if (studentRegistry.studentExists(studentId)) {
-//            printSuccess("Welcome, " + studentRegistry.getStudentName(studentId) + "!");
-//            studentMenu(studentId);
-//        } else {
-//            printError("Student ID '" + studentId + "' not found. Please contact admin.");
-//        }
+        if (studentRegistry.studentExists(studentId)) {
+            printSuccess("Welcome, " + studentRegistry.getStudentName(studentId) + "!");
+            studentMenu(studentId);
+        } else {
+            printError("Student ID '" + studentId + "' not found. Please contact admin.");
+        }
     }
 
     //  STUDENT MENU

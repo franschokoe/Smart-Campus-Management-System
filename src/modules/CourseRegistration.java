@@ -58,8 +58,9 @@ public class CourseRegistration {
     //harded code the value
     private void seedDemoData() {
         // ── Computer Science courses ──
-        addCourseInternal(new Course(null,null,0,null,null,0,null,null));
-//        addCourseInternal(new Course("CS102", "Computer Architecture",             15, "Computer Science", "Semester 1", 100, "Dr. Nkosi",    "Hardware organisation and assembly language."));
+//        addCourseInternal(new Course(null,null,0,null,null,0,null,null));
+        addCourseInternal(new Course("CS102", "Computer Architecture",             15, "Computer Science", "Semester 1", 100, "Dr. Nkosi",    "Hardware organisation and assembly language."));
+//        addCourseInternal(new Course("CS201", "Data Structures & Algorithms",      15, "Computer Science", "Semester 2", 90,  "Dr. Sithole",  "Arrays, linked lists, trees, graphs, sorting."));
 //        addCourseInternal(new Course("CS201", "Data Structures & Algorithms",      15, "Computer Science", "Semester 2", 90,  "Dr. Sithole",  "Arrays, linked lists, trees, graphs, sorting."));
 //        addCourseInternal(new Course("CS202", "Object-Oriented Programming",       15, "Computer Science", "Semester 2", 90,  "Dr. Mokoena", "OOP principles: encapsulation, inheritance, polymorphism."));
 //        addCourseInternal(new Course("CS301", "Database Systems",                  15, "Computer Science", "Semester 1", 80,  "Dr. Zulu",    "Relational model, SQL, transactions, indexing."));
