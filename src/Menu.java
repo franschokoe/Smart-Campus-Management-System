@@ -3,8 +3,8 @@ import modules.StudentRegistry;
 import modules.CourseRegistration;
 //import modules.LibrarySystem;
 //import modules.HostelAllocation;
-//import modules.HelpDesk;
-import modules.EventBooking;
+import modules.HelpDesk;
+//import modules.EventBooking;
 
 import java.util.Scanner;
 
@@ -24,7 +24,7 @@ public class Menu {
     private static final CourseRegistration courseRegistration = new CourseRegistration();
 //    private static final LibrarySystem     librarySystem     = new LibrarySystem();
 //    private static final HostelAllocation  hostelAllocation  = new HostelAllocation();
-//    private static final HelpDesk          helpDesk          = new HelpDesk();
+    private static final HelpDesk          helpDesk          = new HelpDesk();
 //    private static final EventBooking      eventBooking      = new EventBooking();
 
     public static void main(String[] args) {
@@ -397,21 +397,21 @@ public class Menu {
             int choice = readInt("Enter choice: ");
             //Un commenting after implementing the helpDesk
             if (isAdmin) {
-//                switch (choice) {
-//                    case 1 -> helpDesk.processNextTicket();
-//                    case 2 -> helpDesk.displayPendingTickets();
-//                    case 3 -> helpDesk.resolveTicket(scanner);
-//                    case 4 -> helpDesk.displayResolvedTickets();
-//                    case 5 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> helpDesk.processNextTicket();
+                    case 2 -> helpDesk.displayPendingTickets();
+                    case 3 -> helpDesk.resolveTicket(scanner);
+                    case 4 -> helpDesk.displayResolvedTickets();
+                    case 5 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             } else {
-//                switch (choice) {
-//                    case 1 -> helpDesk.submitTicket(scanner);
-//                    case 2 -> helpDesk.checkTicketStatus(scanner);
-//                    case 3 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> helpDesk.submitTicket(scanner);
+                    case 2 -> helpDesk.checkTicketStatus(scanner);
+                    case 3 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             }
         }
     }
