@@ -2,9 +2,9 @@
 import modules.StudentRegistry;
 import modules.CourseRegistration;
 //import modules.LibrarySystem;
-//import modules.HostelAllocation;
+import modules.HostelAllocation;
 import modules.HelpDesk;
-//import modules.EventBooking;
+import modules.EventBooking;
 
 import java.util.Scanner;
 
@@ -23,9 +23,9 @@ public class Menu {
     private static final StudentRegistry   studentRegistry   = new StudentRegistry();
     private static final CourseRegistration courseRegistration = new CourseRegistration();
 //    private static final LibrarySystem     librarySystem     = new LibrarySystem();
-//    private static final HostelAllocation  hostelAllocation  = new HostelAllocation();
+    private static final HostelAllocation  hostelAllocation  = new HostelAllocation();
     private static final HelpDesk          helpDesk          = new HelpDesk();
-//    private static final EventBooking      eventBooking      = new EventBooking();
+    private static final EventBooking      eventBooking      = new EventBooking();
 
     public static void main(String[] args) {
         printWelcomeBanner();
@@ -351,23 +351,23 @@ public class Menu {
             int choice = readInt("Enter choice: ");
 
             if (isAdmin) {
-//                switch (choice) {
-//                    case 1 -> hostelAllocation.addRoom(scanner);
-//                    case 2 -> hostelAllocation.allocateRoom(scanner);
-//                    case 3 -> hostelAllocation.deallocateRoom(scanner);
-//                    case 4 -> hostelAllocation.displayAllRooms();
-//                    case 5 -> hostelAllocation.displayWaitingQueue();
-//                    case 6 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> hostelAllocation.addRoom(scanner);
+                    case 2 -> hostelAllocation.allocateRoom(scanner);
+                    case 3 -> hostelAllocation.deallocateRoom(scanner);
+                    case 4 -> hostelAllocation.displayAllRooms();
+                    case 5 -> hostelAllocation.displayWaitingQueue();
+                    case 6 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             } else {
-//                switch (choice) {
-//                    case 1 -> hostelAllocation.checkAvailability();
-//                    case 2 -> hostelAllocation.applyForHostel(scanner);
-//                    case 3 -> hostelAllocation.checkMyAllocation(scanner);
-//                    case 4 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> hostelAllocation.checkAvailability();
+                    case 2 -> hostelAllocation.applyForHostel(scanner);
+                    case 3 -> hostelAllocation.checkMyAllocation(scanner);
+                    case 4 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             }
         }
     }
@@ -443,23 +443,23 @@ public class Menu {
             int choice = readInt("Enter choice: ");
 
             if (isAdmin) {
-//                switch (choice) {
-//                    case 1 -> eventBooking.createEvent(scanner);
-//                    case 2 -> eventBooking.cancelEvent(scanner);
-//                    case 3 -> eventBooking.displayAllEvents();
-//                    case 4 -> eventBooking.displayEventAttendees(scanner);
-//                    case 5 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> eventBooking.createEvent(scanner);
+                    case 2 -> eventBooking.cancelEvent(scanner);
+                    case 3 -> eventBooking.displayAllEvents();
+                    case 4 -> eventBooking.displayEventAttendees(scanner);
+                    case 5 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             } else {
-//                switch (choice) {
-//                    case 1 -> eventBooking.displayAllEvents();
-//                    case 2 -> eventBooking.bookEvent(scanner);
-//                    case 3 -> eventBooking.cancelMyBooking(scanner);
-//                    case 4 -> eventBooking.myBookings(scanner);
-//                    case 5 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> eventBooking.displayAllEvents();
+                    case 2 -> eventBooking.bookEvent(scanner);
+                    case 3 -> eventBooking.cancelMyBooking(scanner);
+                    case 4 -> eventBooking.myBookings(scanner);
+                    case 5 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             }
         }
     }
