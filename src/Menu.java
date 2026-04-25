@@ -1,7 +1,7 @@
 
 import modules.StudentRegistry;
 import modules.CourseRegistration;
-//import modules.LibrarySystem;
+import modules.LibrarySystem;
 import modules.HostelAllocation;
 import modules.HelpDesk;
 import modules.EventBooking;
@@ -22,7 +22,7 @@ public class Menu {
 
     private static final StudentRegistry   studentRegistry   = new StudentRegistry();
     private static final CourseRegistration courseRegistration = new CourseRegistration();
-//    private static final LibrarySystem     librarySystem     = new LibrarySystem();
+    private static final LibrarySystem     librarySystem     = new LibrarySystem();
     private static final HostelAllocation  hostelAllocation  = new HostelAllocation();
     private static final HelpDesk          helpDesk          = new HelpDesk();
     private static final EventBooking      eventBooking      = new EventBooking();
@@ -300,24 +300,24 @@ public class Menu {
             int choice = readInt("Enter choice: ");
 
             if (isAdmin) {
-//                switch (choice) {
-//                    case 1 -> librarySystem.addBook(scanner);
-//                    case 2 -> librarySystem.removeBook(scanner);
-//                    case 3 -> librarySystem.searchBook(scanner);
-//                    case 4 -> librarySystem.displayAllBooks();
-//                    case 5 -> librarySystem.displayBorrowedBooks();
-//                    case 6 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> librarySystem.addBook(scanner);
+                    case 2 -> librarySystem.removeBook(scanner);
+                    case 3 -> librarySystem.searchBook(scanner);
+                    case 4 -> librarySystem.displayAllBooks();
+                    case 5 -> librarySystem.displayBorrowedBooks();
+                    case 6 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             } else {
-//                switch (choice) {
-//                    case 1 -> librarySystem.searchBook(scanner);
-//                    case 2 -> librarySystem.borrowBook(scanner);
-//                    case 3 -> librarySystem.returnBook(scanner);
-//                    case 4 -> librarySystem.displayAllBooks();
-//                    case 5 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> librarySystem.searchBook(scanner);
+                    case 2 -> librarySystem.borrowBook(scanner);
+                    case 3 -> librarySystem.returnBook(scanner);
+                    case 4 -> librarySystem.displayAllBooks();
+                    case 5 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             }
         }
     }
