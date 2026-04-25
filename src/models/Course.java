@@ -14,9 +14,7 @@ package models;
  */
 public class Course {
 
-    // ─────────────────────────────────────────────
     //  Fields
-    // ─────────────────────────────────────────────
     private String courseCode;
     private String courseName;
     private int    credits;
@@ -27,17 +25,10 @@ public class Course {
     private String lecturer;
     private String description;
 
-    // ─────────────────────────────────────────────
+
     //  Constructor
-    // ─────────────────────────────────────────────
-    public Course(String courseCode,
-                  String courseName,
-                  int    credits,
-                  String department,
-                  String semester,
-                  int    capacity,
-                  String lecturer,
-                  String description) {
+    public Course(String courseCode, String courseName, int    credits, String department, String semester,
+                  int    capacity, String lecturer, String description) {
         this.courseCode  = courseCode;
         this.courseName  = courseName;
         this.credits     = credits;
@@ -49,9 +40,8 @@ public class Course {
         this.description = description;
     }
 
-    // ─────────────────────────────────────────────
-    //  Getters
-    // ─────────────────────────────────────────────
+
+    //  Getter
     public String getCourseCode()     { return courseCode;              }
     public String getCourseName()     { return courseName;              }
     public int    getCredits()        { return credits;                 }
@@ -64,9 +54,7 @@ public class Course {
     public int    getAvailableSlots() { return capacity - enrolled;     }
     public boolean isFull()           { return enrolled >= capacity;    }
 
-    // ─────────────────────────────────────────────
-    //  Setters
-    // ─────────────────────────────────────────────
+    //  Setter
     public void setCourseName(String v)  { this.courseName  = v; }
     public void setCredits(int v)        { this.credits     = v; }
     public void setDepartment(String v)  { this.department  = v; }
@@ -75,15 +63,11 @@ public class Course {
     public void setLecturer(String v)    { this.lecturer    = v; }
     public void setDescription(String v) { this.description = v; }
 
-    // ─────────────────────────────────────────────
     //  Enrolment helpers
-    // ─────────────────────────────────────────────
     public boolean enrol()    { if (isFull())      return false; enrolled++; return true; }
     public boolean withdraw() { if (enrolled <= 0) return false; enrolled--; return true; }
 
-    // ─────────────────────────────────────────────
     //  Display
-    // ─────────────────────────────────────────────
     public void display() {
         String thin = "-".repeat(52);
         System.out.println("\n" + thin);

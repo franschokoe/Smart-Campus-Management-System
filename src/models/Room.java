@@ -1,12 +1,6 @@
 package models;
 
 /**
- * Represents a hostel room in the Smart Campus system.
- *
- * A Room is the data object stored in the HostelAllocation module.
- * It tracks its physical details, occupancy status, and which
- * student is currently assigned to it.
- *
  * Fields:
  *   roomNumber   — unique identifier,  e.g. "A101"
  *   block        — hostel block name,  e.g. "Block A"
@@ -20,9 +14,8 @@ package models;
  */
 public class Room {
 
-    // ─────────────────────────────────────────────
-    //  Fields
-    // ─────────────────────────────────────────────
+
+    //  Fields declared
     private String  roomNumber;
     private String  block;
     private String  roomType;      // Single | Double | Triple
@@ -33,15 +26,9 @@ public class Room {
     private String  occupantName;
     private String  amenities;
 
-    // ─────────────────────────────────────────────
     //  Constructor
-    // ─────────────────────────────────────────────
-    public Room(String roomNumber,
-                String block,
-                String roomType,
-                int    floor,
-                double monthlyFee,
-                String amenities) {
+    public Room(String roomNumber, String block, String roomType,
+                int    floor, double monthlyFee, String amenities) {
         this.roomNumber   = roomNumber;
         this.block        = block;
         this.roomType     = roomType;
@@ -52,10 +39,7 @@ public class Room {
         this.occupantId   = null;
         this.occupantName = null;
     }
-
-    // ─────────────────────────────────────────────
-    //  Getters
-    // ─────────────────────────────────────────────
+    //  Get
     public String  getRoomNumber()   { return roomNumber;   }
     public String  getBlock()        { return block;        }
     public String  getRoomType()     { return roomType;     }
@@ -67,16 +51,12 @@ public class Room {
     public String  getAmenities()    { return amenities;    }
     public String  getStatus()       { return isOccupied ? "Occupied" : "Available"; }
 
-    // ─────────────────────────────────────────────
-    //  Setters
-    // ─────────────────────────────────────────────
+    //  Set
     public void setMonthlyFee(double fee)    { this.monthlyFee = fee;       }
     public void setAmenities(String amen)    { this.amenities  = amen;      }
     public void setRoomType(String type)     { this.roomType   = type;      }
 
-    // ─────────────────────────────────────────────
     //  Occupancy management
-    // ─────────────────────────────────────────────
 
     /**
      * Assigns a student to this room.
@@ -102,9 +82,8 @@ public class Room {
         return true;
     }
 
-    // ─────────────────────────────────────────────
+
     //  Display
-    // ─────────────────────────────────────────────
 
     /** Full formatted room profile card. */
     public void display() {
@@ -117,10 +96,10 @@ public class Room {
         System.out.printf("  %-20s: %s%n",  "Room Type",     roomType);
         System.out.printf("  %-20s: Floor %d%n", "Floor",    floor);
         System.out.printf("  %-20s: R %.2f / month%n", "Monthly Fee", monthlyFee);
-        System.out.printf("  %-20s: %s%n",  "Amenities",     amenities);
+        System.out.printf("  %-20s: %s%n",  "Services",     amenities);
         System.out.printf("  %-20s: %s%n",  "Status",        getStatus());
         if (isOccupied) {
-            System.out.printf("  %-20s: %s%n", "Occupant ID",   occupantId);
+            System.out.printf("  %-20s: %s%n", "Occupant Student No.",   occupantId);
             System.out.printf("  %-20s: %s%n", "Occupant Name", occupantName);
         }
         System.out.println(thin);

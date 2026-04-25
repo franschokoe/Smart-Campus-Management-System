@@ -1,15 +1,6 @@
 package datastructures;
 
 /**
- * CUSTOM HASH TABLE — built from scratch, no java.util.*
- *
- * Strategy : Separate chaining — each bucket holds a singly-linked
- *            list of Entry nodes, so collisions are resolved by
- *            chaining entries in the same bucket.
- *
- * Generic   : CustomHashTable<K, V> works for any key/value types.
- *             For StudentRegistry, K = String (studentId), V = Student.
- *
  * Operations and their time complexities:
  *   put()     — O(1) average, O(n) worst (all keys in same bucket)
  *   get()     — O(1) average
@@ -222,7 +213,6 @@ public class CustomHashTable<K, V> {
 
 
     //  Debug
-    /** Prints internal bucket structure — useful during testing. */
     public void printInternalState() {
         System.out.println("\n  [HashTable Debug — capacity=" + capacity + ", size=" + size + "]");
         for (int i = 0; i < capacity; i++) {

@@ -1,6 +1,6 @@
 
 import modules.StudentRegistry;
-//import modules.CourseRegistration;
+import modules.CourseRegistration;
 //import modules.LibrarySystem;
 //import modules.HostelAllocation;
 //import modules.HelpDesk;
@@ -21,7 +21,7 @@ public class Menu {
     //to be continiued
 
     private static final StudentRegistry   studentRegistry   = new StudentRegistry();
-//    private static final CourseRegistration courseRegistration = new CourseRegistration();
+    private static final CourseRegistration courseRegistration = new CourseRegistration();
 //    private static final LibrarySystem     librarySystem     = new LibrarySystem();
 //    private static final HostelAllocation  hostelAllocation  = new HostelAllocation();
 //    private static final HelpDesk          helpDesk          = new HelpDesk();
@@ -249,23 +249,23 @@ public class Menu {
             //Commented some CourseRgistration
             if (isAdmin) {
 
-//                switch (choice) {
-//                    case 1 -> courseRegistration.addCourse(scanner);
-//                    case 2 -> courseRegistration.removeCourse(scanner);
-//                    case 3 -> courseRegistration.addPrerequisite(scanner);
-//                    case 4 -> courseRegistration.displayAllCourses();
-//                    case 5 -> courseRegistration.showPrerequisites(scanner);
-//                    case 6 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> courseRegistration.addCourse(scanner);
+                    case 2 -> courseRegistration.removeCourse(scanner);
+                    case 3 -> courseRegistration.addPrerequisite(scanner);
+                    case 4 -> courseRegistration.displayAllCourses();
+                    case 5 -> courseRegistration.showPrerequisites(scanner);
+                    case 6 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             } else {
-//                switch (choice) {
-//                    case 1 -> courseRegistration.displayAllCourses();
-//                    case 2 -> courseRegistration.showPrerequisites(scanner);
-//                    case 3 -> courseRegistration.registerForCourse(scanner);
-//                    case 4 -> active = false;
-//                    default -> printError("Invalid option.");
-//                }
+                switch (choice) {
+                    case 1 -> courseRegistration.displayAllCourses();
+                    case 2 -> courseRegistration.showPrerequisites(scanner);
+                    case 3 -> courseRegistration.registerForCourse(scanner);
+                    case 4 -> active = false;
+                    default -> printError("Invalid option.");
+                }
             }
         }
     }

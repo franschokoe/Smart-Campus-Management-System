@@ -27,9 +27,7 @@ public class CustomGraph {
         edgeCount   = 0;
     }
 
-    // ═════════════════════════════════════════════
     //  VERTEX OPERATIONS
-    // ═════════════════════════════════════════════
 
     /** Adds vertex. Returns its index. No-op if label already exists. */
     public int addVertex(String label) {
@@ -64,15 +62,7 @@ public class CustomGraph {
     public int vertexCount()               { return vertexCount;          }
     public int edgeCount()                 { return edgeCount;            }
 
-    // ═════════════════════════════════════════════
     //  EDGE OPERATIONS
-    // ═════════════════════════════════════════════
-
-    /**
-     * Adds directed edge: from ──► to
-     * In course terms: addEdge("CS101","CS201") means
-     * CS101 is a prerequisite of CS201.
-     */
     public boolean addEdge(String from, String to) {
         int fi = indexOf(from);
         int ti = indexOf(to);
@@ -104,10 +94,7 @@ public class CustomGraph {
         return false;
     }
 
-    // ═════════════════════════════════════════════
-    //  GRAPH QUERIES
-    // ═════════════════════════════════════════════
-
+    //  GRAPH QUERIE
     /** All vertices that have a direct edge pointing TO courseCode. */
     public String[] getDirectPrerequisites(String courseCode) {
         int targetIdx = indexOf(courseCode);
@@ -215,15 +202,8 @@ public class CustomGraph {
         return result;
     }
 
-    // ═════════════════════════════════════════════
     //  CYCLE DETECTION  (DFS three-colour)
-    // ═════════════════════════════════════════════
 
-    /**
-     * Returns true if the graph contains a directed cycle.
-     * Three colours: 0=WHITE(unvisited), 1=GREY(in stack), 2=BLACK(done)
-     * A grey->grey back-edge means a cycle exists.
-     */
     public boolean hasCycle() {
         int[] colour = new int[capacity];
         for (int i = 0; i < capacity; i++) {
@@ -257,10 +237,7 @@ public class CustomGraph {
         return false;
     }
 
-    // ═════════════════════════════════════════════
     //  TOPOLOGICAL SORT  (Kahn's BFS algorithm)
-    // ═════════════════════════════════════════════
-
     /**
      * Returns a valid study order that respects all prerequisites.
      * Returns null if a cycle exists (no valid order possible).
@@ -300,10 +277,7 @@ public class CustomGraph {
         return result;
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY
-    // ═════════════════════════════════════════════
-
     /** Prints the full adjacency list. */
     public void printGraph() {
         System.out.println("\n  [Prerequisite Graph — Adjacency List]");
@@ -340,10 +314,7 @@ public class CustomGraph {
         System.out.println();
     }
 
-    // ═════════════════════════════════════════════
     //  PRIVATE HELPERS
-    // ═════════════════════════════════════════════
-
     private int indexOf(String label) {
         for (int i = 0; i < capacity; i++) {
             if (vertices[i] != null && vertices[i].label.equals(label)) return i;
