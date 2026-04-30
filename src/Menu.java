@@ -341,8 +341,9 @@ public class Menu {
                 System.out.println("  2. Allocate Room to Student");
                 System.out.println("  3. Deallocate Room");
                 System.out.println("  4. View All Rooms");
-                System.out.println("  5. View Waiting Queue");
-                System.out.println("  6. Back");
+                System.out.println("  5. Vieew Allocated Rooms");
+                System.out.println("  6. View Waiting Queue");
+                System.out.println("  7. Back");
             } else {
                 //Sudent access only
                 System.out.println("  1. Check Room Availability");
@@ -360,8 +361,9 @@ public class Menu {
                     case 2 -> hostelAllocation.allocateRoom(scanner);
                     case 3 -> hostelAllocation.deallocateRoom(scanner);
                     case 4 -> hostelAllocation.displayAllRooms();
-                    case 5 -> hostelAllocation.displayWaitingQueue();
-                    case 6 -> active = false;
+                    case 5 -> hostelAllocation.displayOccupiedRooms();
+                    case 6 -> hostelAllocation.displayWaitingQueue();
+                    case 7 -> active = false;
                     default -> printError("Invalid option.");
                 }
             } else {

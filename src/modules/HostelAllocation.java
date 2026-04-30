@@ -6,56 +6,9 @@ import models.Room;
 
 import java.util.Scanner;
 
-/**
- * HOSTEL ALLOCATION MODULE
- *
- * Manages campus room inventory and student room assignments.
- *
- * ─────────────────────────────────────────────────────────────
- *  Data Structures Used
- * ─────────────────────────────────────────────────────────────
- *  CustomHashTable<String, Room>
- *    — Stores all Room objects keyed by roomNumber (e.g. "A101")
- *    — O(1) average lookup, insert, delete
- *    — Used to: find a specific room, check if it is occupied,
- *               update occupancy, display all rooms
- *
- *  CustomQueue<String>  (waitingQueue)
- *    — Stores studentIds of students waiting for a room
- *    — FIFO — first to apply is first to receive a room
- *    — When a room becomes available, we dequeue the next student
- *    — O(1) enqueue and dequeue
- *
- *  CustomHashTable<String, String>  (studentRoomMap)
- *    — Maps studentId → roomNumber for quick "which room am I in?" lookup
- *    — O(1) lookup — used for student-facing allocation check
- *
- * ─────────────────────────────────────────────────────────────
- *  Public API
- * ─────────────────────────────────────────────────────────────
- *  Admin:
- *    addRoom(scanner)          — add a new room to inventory
- *    removeRoom(scanner)       — remove a room (must be vacant)
- *    allocateRoom(scanner)     — manually assign a room to a student
- *    deallocateRoom(scanner)   — free a room (auto-offers to next in queue)
- *    updateRoom(scanner)       — edit room details
- *    displayAllRooms()         — list every room with status
- *    displayAvailableRooms()   — list only vacant rooms
- *    displayOccupiedRooms()    — list only occupied rooms
- *    displayWaitingQueue()     — show the full waiting list
- *    displayStatistics()       — occupancy stats summary
- *
- *  Student:
- *    applyForHostel(scanner)   — join waiting queue or get a room
- *    checkMyAllocation(scanner)— see which room they are assigned to
- *    checkAvailability()       — see how many rooms are free
- *    cancelApplication(scanner)— remove themselves from the queue
- */
 public class HostelAllocation {
 
-    // ─────────────────────────────────────────────
     //  Storage
-    // ─────────────────────────────────────────────
     private final CustomHashTable<String, Room>   rooms;          // roomNumber → Room
     private final CustomQueue<String>             waitingQueue;   // studentIds waiting
     private final CustomHashTable<String, String> studentRoomMap; // studentId → roomNumber
@@ -63,9 +16,7 @@ public class HostelAllocation {
     private static final String BORDER      = "=".repeat(56);
     private static final String THIN_BORDER = "-".repeat(56);
 
-    // ─────────────────────────────────────────────
     //  Constructor — seeds demo rooms
-    // ─────────────────────────────────────────────
     public HostelAllocation() {
         rooms          = new CustomHashTable<>(32);
         waitingQueue   = new CustomQueue<>(20);
@@ -74,37 +25,78 @@ public class HostelAllocation {
     }
 
     private void seedDemoData() {
-        // ── Block A — Single rooms ──────────────────────────────
-        addRoomInternal(new Room("A101", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
-//        addRoomInternal(new Room("A102", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
-//        addRoomInternal(new Room("A103", "Block A", "Single", 1, 2500.00, "Wi-Fi, Desk, Wardrobe"));
-//        addRoomInternal(new Room("A201", "Block A", "Single", 2, 2700.00, "Wi-Fi, Desk, Wardrobe, En-suite"));
-//        addRoomInternal(new Room("A202", "Block A", "Single", 2, 2700.00, "Wi-Fi, Desk, Wardrobe, En-suite"));
+        // ── Moshobane — Single rooms ──────────────────────────────
+        addRoomInternal(new Room(
+                "M1",
+                "Moshobane",
+                "Single",
+                1,
+                2500.00,
+                "Wi-Fi, Desk, Wardrobe"
+        ));
+        addRoomInternal(new Room(
+                "M2",
+                "Moshabane",
+                "Single",
+                1,
+                2500.00,
+                "Wi-Fi, Desk, Wardrobe"
+        ));
+        addRoomInternal(new Room(
+                "M3",
+                "Moshobane",
+                "Single",
+                1,
+                2500.00,
+                "Wi-Fi, Desk, Wardrobe"
+        ));
 
-        // ── Block B — Double rooms ──────────────────────────────
-//        addRoomInternal(new Room("B101", "Block B", "Double", 1, 1800.00, "Wi-Fi, Shared Bathroom"));
-//        addRoomInternal(new Room("B102", "Block B", "Double", 1, 1800.00, "Wi-Fi, Shared Bathroom"));
-//        addRoomInternal(new Room("B201", "Block B", "Double", 2, 2000.00, "Wi-Fi, Air-Con, Shared Bathroom"));
-//        addRoomInternal(new Room("B202", "Block B", "Double", 2, 2000.00, "Wi-Fi, Air-Con, Shared Bathroom"));
+        // ── Thambo — Double rooms
+        addRoomInternal(new Room(
+                "T100",
+                "Thambo",
+                "Double",
+                1, 1800.00,
+                "Wi-Fi, Shared Bathroom"
+        ));
+        addRoomInternal(new Room(
+                "T101",
+                "Thambo",
+                "Double",
+                1, 1800.00
+                , "Wi-Fi, Shared Bathroom"
+        ));
+        addRoomInternal(new Room(
+                "T102",
+                "Thambo",
+                "Double",
+                1,
+                2000.00,
+                "Wi-Fi, Air-Con, Shared Bathroom"
+        ));
 
-        // ── Block C — Triple rooms ──────────────────────────────
-//        addRoomInternal(new Room("C101", "Block C", "Triple", 1, 1200.00, "Wi-Fi, Shared Bathroom, Common Room"));
-//        addRoomInternal(new Room("C102", "Block C", "Triple", 1, 1200.00, "Wi-Fi, Shared Bathroom, Common Room"));
-//        addRoomInternal(new Room("C201", "Block C", "Triple", 2, 1400.00, "Wi-Fi, Air-Con, Shared Bathroom"));
+        // ── MBH —
+        addRoomInternal(new Room(
+                "10",
+                "MBH 1",
+                "Triple",
+                1,
+                1200.00,
+                "Wi-Fi, Shared Bathroom, Common Room"
+        ));
+        addRoomInternal(new Room(
+                "20",
+                "MBH 2",
+                "Triple",
+                1,
+                1200.00,
+                "Wi-Fi, Shared Bathroom, Common Room"
+        ));
 
-        // ── Pre-allocate some rooms to seed students ─────────────
-//        allocateInternal("A101", "S001", "Thabo Nkosi");
-//        allocateInternal("B101", "S002", "Lerato Dlamini");
-//        allocateInternal("A201", "S003", "Sipho Mokoena");
-
-        // ── Seed waiting queue ───────────────────────────────────
-        waitingQueue.enqueue("S004");
-        waitingQueue.enqueue("S005");
     }
 
-    // ─────────────────────────────────────────────
+
     //  Internal helpers
-    // ─────────────────────────────────────────────
     private void addRoomInternal(Room r) {
         rooms.put(r.getRoomNumber(), r);
     }
@@ -117,9 +109,9 @@ public class HostelAllocation {
         return true;
     }
 
-    // ═════════════════════════════════════════════
+
     //  ADD ROOM  (admin)
-    // ═════════════════════════════════════════════
+
     public void addRoom(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  ADD NEW ROOM");
@@ -131,11 +123,11 @@ public class HostelAllocation {
             return;
         }
 
-        String block  = prompt(scanner, "Block name (e.g. Block D)");
+        String block  = prompt(scanner, "Res name ");
         String type   = readRoomType(scanner);
         int    floor  = readInt(scanner, "Floor number", 0, 10);
         double fee    = readDouble(scanner, "Monthly fee (R)", 500, 10000);
-        String amen   = prompt(scanner, "Amenities (comma-separated, e.g. Wi-Fi, Desk)");
+        String amen   = prompt(scanner, "Services (e.g. Wi-Fi, Desk)");
 
         Room r = new Room(number, block, type, floor, fee, amen);
         addRoomInternal(r);
@@ -149,9 +141,7 @@ public class HostelAllocation {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  REMOVE ROOM  (admin)
-    // ═════════════════════════════════════════════
     public void removeRoom(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  REMOVE ROOM");
@@ -173,9 +163,7 @@ public class HostelAllocation {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  ALLOCATE ROOM  (admin)
-    // ═════════════════════════════════════════════
     public void allocateRoom(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  ALLOCATE ROOM TO STUDENT");
@@ -239,7 +227,7 @@ public class HostelAllocation {
 
     // Allocate to any specific student (bypasses queue — admin discretion)
     private void allocateManually(Scanner scanner) {
-        String studentId   = prompt(scanner, "Enter Student ID").toUpperCase();
+        String studentId   = prompt(scanner, "Enter Student Number").toUpperCase();
         String studentName = prompt(scanner, "Enter student's full name");
         String roomNumber  = prompt(scanner, "Enter Room Number to assign").toUpperCase();
 
@@ -268,9 +256,7 @@ public class HostelAllocation {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  DEALLOCATE ROOM  (admin)
-    // ═════════════════════════════════════════════
     public void deallocateRoom(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  DEALLOCATE ROOM");
@@ -304,9 +290,7 @@ public class HostelAllocation {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  UPDATE ROOM  (admin)
-    // ═════════════════════════════════════════════
     public void updateRoom(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  UPDATE ROOM");
@@ -332,9 +316,7 @@ public class HostelAllocation {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY ALL ROOMS  (admin)
-    // ═════════════════════════════════════════════
     public void displayAllRooms() {
         Object[] allRooms = rooms.getAllValues();
         if (allRooms.length == 0) { printError("No rooms in inventory."); return; }
@@ -355,9 +337,7 @@ public class HostelAllocation {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY AVAILABLE ROOMS  (both)
-    // ═════════════════════════════════════════════
     public void displayAvailableRooms() {
         Object[] allRooms = rooms.getAllValues();
         int count = countAvailableRooms();
@@ -379,9 +359,7 @@ public class HostelAllocation {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY OCCUPIED ROOMS  (admin)
-    // ═════════════════════════════════════════════
     public void displayOccupiedRooms() {
         Object[] allRooms = rooms.getAllValues();
         int count = countOccupiedRooms();
@@ -402,20 +380,18 @@ public class HostelAllocation {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY WAITING QUEUE  (admin)
-    // ═════════════════════════════════════════════
     public void displayWaitingQueue() {
         System.out.println("\n" + BORDER);
         System.out.println("  HOSTEL WAITING QUEUE");
-        System.out.println("  Students are served in FIFO order (first applied = first allocated)");
+        System.out.println("  Students are served (first applied = first allocated)");
         System.out.println(BORDER);
 
         if (waitingQueue.isEmpty()) {
             System.out.println("  Waiting queue is empty — no students pending allocation.");
         } else {
             Object[] waiting = waitingQueue.toArray();
-            System.out.println("  Position  Student ID");
+            System.out.println("  Position  Student Number");
             System.out.println(THIN_BORDER);
             for (int i = 0; i < waiting.length; i++) {
                 String marker = (i == 0) ? "  ← NEXT" : "";
@@ -428,9 +404,7 @@ public class HostelAllocation {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY STATISTICS  (admin)
-    // ═════════════════════════════════════════════
     public void displayStatistics() {
         Object[] allRooms = rooms.getAllValues();
         int total     = allRooms.length;
@@ -470,15 +444,13 @@ public class HostelAllocation {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  APPLY FOR HOSTEL  (student)
-    // ═════════════════════════════════════════════
     public void applyForHostel(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  APPLY FOR HOSTEL ROOM");
         System.out.println(THIN_BORDER);
 
-        String studentId = prompt(scanner, "Enter your Student ID").toUpperCase();
+        String studentId = prompt(scanner, "Enter your Student Number").toUpperCase();
 
         // Already allocated?
         if (studentRoomMap.containsKey(studentId)) {
@@ -543,15 +515,13 @@ public class HostelAllocation {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  CHECK MY ALLOCATION  (student)
-    // ═════════════════════════════════════════════
     public void checkMyAllocation(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  MY HOSTEL ALLOCATION");
         System.out.println(THIN_BORDER);
 
-        String studentId = prompt(scanner, "Enter your Student ID").toUpperCase();
+        String studentId = prompt(scanner, "Enter your Student Number").toUpperCase();
 
         // Allocated to a room?
         if (studentRoomMap.containsKey(studentId)) {
@@ -576,13 +546,10 @@ public class HostelAllocation {
         }
 
         // Not found in either
-        printError("No hostel application found for student ID " + studentId + ".");
+        printError("No hostel application found for student Number " + studentId + ".");
         System.out.println("  Use 'Apply for Hostel' to submit an application.");
     }
-
-    // ═════════════════════════════════════════════
     //  CHECK AVAILABILITY  (student)
-    // ═════════════════════════════════════════════
     public void checkAvailability() {
         int available = countAvailableRooms();
         int waiting   = waitingQueue.size();
@@ -604,9 +571,7 @@ public class HostelAllocation {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  CANCEL APPLICATION  (student)
-    // ═════════════════════════════════════════════
     public void cancelApplication(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  CANCEL HOSTEL APPLICATION");
@@ -628,10 +593,8 @@ public class HostelAllocation {
         }
     }
 
-    // ═════════════════════════════════════════════
-    //  PRIVATE HELPERS
-    // ═════════════════════════════════════════════
 
+    //  PRIVATE HELPERS
     /** Counts rooms that are currently not occupied. */
     private int countAvailableRooms() {
         Object[] allRooms = rooms.getAllValues();
@@ -647,10 +610,7 @@ public class HostelAllocation {
         return rooms.size() - countAvailableRooms();
     }
 
-    /**
-     * Finds the first available room matching the given type.
-     * If type is "Any", returns the first available room found.
-     */
+
     private Room findAvailableRoom(String type) {
         Object[] allRooms = rooms.getAllValues();
         for (Object obj : allRooms) {
@@ -662,12 +622,6 @@ public class HostelAllocation {
         return null;
     }
 
-    /**
-     * Removes a specific studentId from the waiting queue.
-     * Since CustomQueue has no direct remove-by-value, we drain it
-     * and re-enqueue everything except the target student.
-     * O(n) — acceptable since waiting queues are small.
-     */
     private void removeFromQueue(String studentId) {
         Object[] all = waitingQueue.toArray();
         waitingQueue.clear();
