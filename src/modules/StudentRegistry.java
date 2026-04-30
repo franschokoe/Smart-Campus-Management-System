@@ -15,42 +15,212 @@ import java.util.Scanner;
  */
 public class StudentRegistry {
 
-    // ─────────────────────────────────────────────
     //  Storage — custom hash table
-    // ─────────────────────────────────────────────
     private final CustomHashTable<String, Student> table;
 
     private static final String BORDER      = "=".repeat(50);
     private static final String THIN_BORDER = "-".repeat(50);
 
-    // ─────────────────────────────────────────────
     //  Constructor — seeds a few demo students
-    // ─────────────────────────────────────────────
     public StudentRegistry() {
         table = new CustomHashTable<>(16);
         seedDemoData();
     }
-
+//   Stdent data
     private void seedDemoData() {
-        table.put("1001", new Student("1001", "Thabo",   "Nkosi",    "thabo@campus.ac.za",   "0712345678", "BSc Computer Science",  2, 3.5, "Active"));
-        table.put("1002", new Student("1002", "Lerato",  "Dlamini",  "lerato@campus.ac.za",  "0823456789", "BCom Accounting",       1, 3.8, "Active"));
-        table.put("1003", new Student("1003", "Sipho",   "Mokoena",  "sipho@campus.ac.za",   "0634567890", "BEng Civil",            3, 3.2, "Active"));
-        table.put("1004", new Student("1004", "Nomsa",   "Zulu",     "nomsa@campus.ac.za",   "0745678901", "BA Psychology",         4, 2.9, "Active"));
-        table.put("1005", new Student("1005", "Kagiso",  "Sithole",  "kagiso@campus.ac.za",  "0856789012", "BSc Computer Science",  1, 3.6, "Active"));
-    }
+        table.put("202232392", new Student("202232392",
+                "P",
+                "SIRAKALALA",
+                "202232392@ul.ac.za",
+                "0712345678",
+                "BA Swim",
+                2, 3.5,
+                "Active"));
+        table.put("240032476", new Student("240032476",
+                "S J",
+                "MALELE",
+                "240032476@ul.ac.za",
+                "0740032476",
+                "BSc Computer Engineering",
+                2, 3.0,
+                "Active"));
 
-    // ═════════════════════════════════════════════
+        table.put("240032536", new Student("240032536",
+                "M M",
+                "Makgoga",
+                "240032536@ul.ac.za",
+                "07123345478",
+                "BA Observation",
+                3, 0.5,
+                "Active"));
+
+        table.put("202133247", new Student("202133247",
+                "G",
+                "CHAUKE",
+                "202133247@ul.ac.za",
+                "0765445678",
+                "BEd Senior FET",
+                3, 2.5,
+                "Active"));
+
+        table.put("202333287", new Student("202333287",
+                "F M",
+                "SARILA",
+                "202333287@ul.ac.za",
+                "071234234",
+                "BSc Physical Science",
+                2, 0.2,
+                "Active"));
+
+        table.put("202333486", new Student("202333486",
+                "S",
+                "NEMBUDANA",
+                "202333486@ul.ac.za",
+                "0712345678",
+                "Bachelor of Fire Fighter",
+                3, 1.5,
+                "Suspended"));
+
+        table.put("202333658", new Student("202333658",
+                "B",
+                "MASEGARE",
+                "202333658@ul.ac.za",
+                "06455678",
+                "BA cooking",
+                2, 4.0,
+                "Active"));
+
+        table.put("202335158", new Student("202335158",
+                "MG",
+                "MOOKA",
+                "202335158@ul.ac.za",
+                "023456768",
+                "BSc Talking Science",
+                2, 2.0,
+                "Active"));
+
+        table.put("240035420", new Student("240035420",
+                "NC",
+                "MNGOMENI",
+                "240035420@ul.ac.za",
+                "0645567823",
+                "BA Media",
+                2, 4.0,
+                "Active"));
+
+        table.put("202035570", new Student("202035570",
+                "T",
+                "MTHEMBU",
+                "202035570@ul.ac.za",
+                "06455678",
+                "MBCHB",
+                2, 4.0,
+                "Suspended"));
+
+        table.put("240036190", new Student("240036190",
+                "Kgodiso",
+                "Matlala",
+                "240036190@ul.ac.za",
+                "7221345678",
+                "BA Walking",
+                2, 3.0,
+                "Active"));
+
+        table.put("240036268", new Student("240036268",
+                "MM",
+                "SEKUBA",
+                "240036268@ul.ac.za",
+                "0976323456",
+                "BSc Acturial Science",
+                4, 2.0,
+                "Active"));
+
+        table.put("202236561", new Student("202236561",
+                "J",
+                "PUSO",
+                "202236561@ul.ac.za",
+                "06455674548",
+                "BSc Forensic Science",
+                1, 4.0,
+                "Active"));
+
+        table.put("250036945", new Student("250036945",
+                "LM",
+                "MAMABOLO",
+                "250036945@ul.ac.za",
+                "06451225678",
+                "Optometry",
+                1, 1.0,
+                "Active"));
+
+        table.put("240037317", new Student("240037317",
+                "KP",
+                "MOLELE",
+                "240037317@ul.ac.za",
+                "045342378",
+                "BSc Water Science",
+                4, 4.0,
+                "Active"));
+
+        table.put("250038198", new Student("250038198",
+                "PR",
+                "MODISHA",
+                "250038198@ul.ac.za",
+                "0645561278",
+                "BSc Soil Science",
+                1, 2.1,
+                "Active"));
+
+        table.put("202338218", new Student("202338218",
+                "DA",
+                "MOTHOBEKI",
+                "202338218@ul.ac.za",
+                "06455678",
+                "BSc Geology Science",
+                2, 4.0,
+                "Suspended"));
+
+        table.put("202238434", new Student("202238434",
+                "Frans M",
+                "Chokoe",
+                "202238434@ul.ac.za",
+                "0794181936",
+                "BSc Data Engineering",
+                2, 3.0,
+
+                "Active"));
+
+        table.put("240038450", new Student("240038450",
+                "K",
+                "MAPONYA",
+                "240038450@ul.ac.za",
+                "0792322321",
+                "BSc DATA Analyst",
+                1, 3.0,
+                "Active"));
+
+        table.put("250039408", new Student("250039408",
+                "D",
+                "MOROPA",
+                "250039408@ul.ac.za",
+                "1124536457",
+                "Pharmacy",
+                4, 0.4,
+                "Active"));
+
+
+
+    }
     //  ADD STUDENT
-    // ═════════════════════════════════════════════
     public void addStudent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  ADD NEW STUDENT");
         System.out.println(THIN_BORDER);
 
-        String id = readStudentId(scanner, "Student ID (digits only, e.g. 1006)");
+        String id = readStudentId(scanner, "Student Number");
 
         if (table.containsKey(id)) {
-            printError("Student ID '" + id + "' already exists.");
+            printError("Student Number '" + id + "' already exists.");
             return;
         }
 
@@ -58,7 +228,7 @@ public class StudentRegistry {
         String lastName  = prompt(scanner, "Last Name");
         String email     = prompt(scanner, "Email Address");
         String phone     = prompt(scanner, "Phone Number");
-        String programme = prompt(scanner, "Programme (e.g. BSc Computer Science)");
+        String programme = prompt(scanner, "Degree (e.g. BSc Computer Science)");
 
         int year = 0;
         while (year < 1 || year > 4) {
@@ -73,8 +243,8 @@ public class StudentRegistry {
         double gpa = -1;
         while (gpa < 0.0 || gpa > 4.0) {
             try {
-                gpa = Double.parseDouble(prompt(scanner, "GPA (0.0 - 4.0)"));
-                if (gpa < 0.0 || gpa > 4.0) printError("GPA must be between 0.0 and 4.0.");
+                gpa = Double.parseDouble(prompt(scanner, "Average (0.0 - 4.0)"));
+                if (gpa < 0.0 || gpa > 4.0) printError("Average must be between 0.0 and 4.0.");
             } catch (NumberFormatException e) {
                 printError("Please enter a valid number.");
             }
@@ -118,14 +288,14 @@ public class StudentRegistry {
     }
 
     private void searchByName(Scanner scanner) {
-        String query = prompt(scanner, "Enter name (or part of name)").toLowerCase();
+        String query = prompt(scanner, "Enter name").toLowerCase();
 
         Object[] values = table.getAllValues();
         boolean  found  = false;
 
         System.out.println("\n" + THIN_BORDER);
         System.out.printf("  %-10s %-22s %-30s %-8s %s%n",
-                "ID", "Full Name", "Email", "Status", "Year");
+                "Student No.", "Full Name", "Email", "Status", "Year");
         System.out.println(THIN_BORDER);
 
         for (Object obj : values) {
@@ -145,19 +315,18 @@ public class StudentRegistry {
         }
     }
 
-    // ═════════════════════════════════════════════
+
     //  DELETE STUDENT
-    // ═════════════════════════════════════════════
     public void deleteStudent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  DELETE STUDENT");
         System.out.println(THIN_BORDER);
 
-        String id = readStudentId(scanner, "Enter Student ID to delete (digits only)");
+        String id = readStudentId(scanner, "Enter Student Number to delete");
         Student s = table.get(id);
 
         if (s == null) {
-            printError("Student ID '" + id + "' not found.");
+            printError("Student No. '" + id + "' not found.");
             return;
         }
 
@@ -172,19 +341,18 @@ public class StudentRegistry {
         }
     }
 
-    // ═════════════════════════════════════════════
+//    need to be added
     //  UPDATE STUDENT
-    // ═════════════════════════════════════════════
     public void updateStudent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  UPDATE STUDENT");
         System.out.println(THIN_BORDER);
 
-        String id = readStudentId(scanner, "Enter Student ID to update (digits only)");
+        String id = readStudentId(scanner, "Enter Student No to update.");
         Student s = table.get(id);
 
         if (s == null) {
-            printError("Student ID '" + id + "' not found.");
+            printError("Student No '" + id + "' not found.");
             return;
         }
 
@@ -253,9 +421,7 @@ public class StudentRegistry {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY ALL STUDENTS
-    // ═════════════════════════════════════════════
     public void displayAllStudents() {
         if (table.isEmpty()) {
             printError("No students registered yet.");
@@ -268,7 +434,7 @@ public class StudentRegistry {
         System.out.println("  ALL REGISTERED STUDENTS  (" + table.size() + " total)");
         System.out.println(BORDER);
         System.out.printf("  %-10s %-22s %-30s %-12s %s%n",
-                "ID", "Full Name", "Email", "Status", "Year");
+                "Student No.", "Full Name", "Email", "Status", "Year");
         System.out.println(THIN_BORDER);
 
         for (Object obj : values) {
@@ -281,9 +447,7 @@ public class StudentRegistry {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY SINGLE STUDENT (student-facing)
-    // ═════════════════════════════════════════════
     public void displayStudent(String studentId) {
         Student s = table.get(studentId);
         if (s != null) {
@@ -292,10 +456,8 @@ public class StudentRegistry {
             printError("Student profile not found.");
         }
     }
-
-    // ═════════════════════════════════════════════
+    // we will implement
     //  STATISTICS (admin)
-    // ═════════════════════════════════════════════
     public void displayStatistics() {
         if (table.isEmpty()) {
             printError("No student data available.");
@@ -343,10 +505,7 @@ public class StudentRegistry {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  HELPERS USED BY Main.java
-    // ═════════════════════════════════════════════
-
     /** Returns true if a student with this ID exists — used for login validation. */
     public boolean studentExists(String studentId) {
         return table.containsKey(studentId);
@@ -358,10 +517,8 @@ public class StudentRegistry {
         return (s != null) ? s.getFullName() : "Unknown";
     }
 
-    // ─────────────────────────────────────────────
-    //  Private utility methods
-    // ─────────────────────────────────────────────
 
+    //  Private utility methods and error handlers
     /**
      * Reads and validates a numeric Student ID from the console.
      *
@@ -386,7 +543,7 @@ public class StudentRegistry {
             String input = prompt(scanner, label).trim();
 
             if (input.isEmpty()) {
-                printError("Student ID cannot be blank. Please enter digits only (e.g. 1001).");
+                printError("Student Number cannot be blank. Please enter digits only");
                 continue;
             }
 
@@ -400,7 +557,7 @@ public class StudentRegistry {
             }
 
             if (!allDigits) {
-                printError("Invalid ID '" + input + "' — Student IDs must contain digits only.");
+                printError("Invalid Student Number '" + input + "' — Student Numbers must contain digits only.");
                 printError("Letters, spaces, and symbols are not allowed. Try again (e.g. 1001).");
                 continue;
             }
@@ -425,7 +582,7 @@ public class StudentRegistry {
 
 
 
-
+//first version
 
 //package modules;
 //
