@@ -6,60 +6,9 @@ import models.Ticket;
 
 import java.util.Scanner;
 
-/**
- * HELP DESK MODULE
- *
- * Manages campus support tickets with priority-based processing.
- *
- * ─────────────────────────────────────────────────────────────
- *  Data Structures Used
- * ─────────────────────────────────────────────────────────────
- *
- *  CustomMinHeap<Ticket>  (pendingHeap)
- *    Stores all OPEN and IN-PROGRESS tickets.
- *    The heap always places the most urgent ticket (lowest
- *    priority number) at the root, so processNextTicket()
- *    always picks the right one in O(1) peek / O(log n) extract.
- *
- *  CustomHashTable<String, Ticket>  (resolvedTable)
- *    Stores all RESOLVED tickets keyed by ticketId.
- *    Once a ticket is resolved it leaves the heap and enters
- *    this table for O(1) lookup and record-keeping.
- *
- *  CustomHashTable<String, Ticket>  (allTickets)
- *    Master index of every ticket (pending + resolved),
- *    keyed by ticketId. Allows a student to look up their
- *    ticket status in O(1) without scanning the heap.
- *
- * ─────────────────────────────────────────────────────────────
- *  Priority Levels
- * ─────────────────────────────────────────────────────────────
- *    1 — CRITICAL  (system down, safety issue)
- *    2 — HIGH      (blocking academic progress)
- *    3 — MEDIUM    (inconvenient but workable)
- *    4 — LOW       (general inquiry / cosmetic)
- *
- * ─────────────────────────────────────────────────────────────
- *  Public API  (called by Main.java)
- * ─────────────────────────────────────────────────────────────
- *  Admin:
- *    processNextTicket()       — extract highest-priority ticket
- *    resolveTicket(scanner)    — close a ticket with a note
- *    displayPendingTickets()   — show all open/in-progress tickets
- *    displayResolvedTickets()  — show all resolved tickets
- *    displayAllTickets()       — show every ticket
- *    displayStatistics()       — ticket counts by priority/status
- *    escalateTicket(scanner)   — raise a ticket's priority
- *
- *  Student:
- *    submitTicket(scanner)     — raise a new support ticket
- *    checkTicketStatus(scanner)— look up status by ticket ID
- */
 public class HelpDesk {
 
-    // ─────────────────────────────────────────────
     //  Storage
-    // ─────────────────────────────────────────────
     private final CustomMinHeap<Ticket>          pendingHeap;    // open tickets by priority
     private final CustomHashTable<String, Ticket> resolvedTable; // resolved tickets
     private final CustomHashTable<String, Ticket> allTickets;    // master index
@@ -67,9 +16,8 @@ public class HelpDesk {
     private static final String BORDER      = "=".repeat(56);
     private static final String THIN_BORDER = "-".repeat(56);
 
-    // ─────────────────────────────────────────────
+
     //  Constructor
-    // ─────────────────────────────────────────────
     public HelpDesk() {
         pendingHeap   = new CustomMinHeap<>(20);
         resolvedTable = new CustomHashTable<>(16);
@@ -77,16 +25,17 @@ public class HelpDesk {
         seedDemoData();
     }
 
-    // ─────────────────────────────────────────────
+
     //  Demo data
-    // ─────────────────────────────────────────────
     private void seedDemoData() {
-        submitInternal(new Ticket("S002", "Lerato Dlamini",  "IT Support",  "Cannot login to student portal",         1, "2025-08-01"));
-        submitInternal(new Ticket("S003", "Sipho Mokoena",  "Finance",     "Bursary payment not reflected",           2, "2025-08-02"));
-        submitInternal(new Ticket("S001", "Thabo Nkosi",    "Library",     "Lost library card, need replacement",     3, "2025-08-03"));
-        submitInternal(new Ticket("S004", "Nomsa Zulu",     "Housing",     "Room heater not working",                 3, "2025-08-04"));
-        submitInternal(new Ticket("S005", "Kagiso Sithole", "IT Support",  "Slow Wi-Fi in Block B",                   4, "2025-08-05"));
-        submitInternal(new Ticket("S001", "Thabo Nkosi",    "Academic",    "Wrong grade captured for CS101",          2, "2025-08-06"));
+        submitInternal(new Ticket(
+                "202232392",
+                "SIRAKALALA",
+                "IT Support",
+                "Cannot login to student portal",
+                1,
+                "2026-04-25"
+        ));
     }
 
     /** Internal helper — adds ticket to both heap and master index. */
@@ -95,15 +44,13 @@ public class HelpDesk {
         allTickets.put(ticket.getTicketId(), ticket);
     }
 
-    // ═════════════════════════════════════════════
     //  SUBMIT TICKET  (student)
-    // ═════════════════════════════════════════════
     public void submitTicket(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  SUBMIT HELP DESK TICKET");
         System.out.println(THIN_BORDER);
 
-        String studentId   = prompt(scanner, "Your Student ID").toUpperCase();
+        String studentId   = prompt(scanner, "Your Student Number").toUpperCase();
         String studentName = prompt(scanner, "Your Full Name");
 
         // Category selection
@@ -156,9 +103,7 @@ public class HelpDesk {
         ticket.display();
     }
 
-    // ═════════════════════════════════════════════
     //  PROCESS NEXT TICKET  (admin)
-    // ═════════════════════════════════════════════
     public void processNextTicket() {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  PROCESS NEXT TICKET");
@@ -183,9 +128,7 @@ public class HelpDesk {
         System.out.println("  Use 'Resolve Ticket' to close it when done.");
     }
 
-    // ═════════════════════════════════════════════
     //  RESOLVE TICKET  (admin)
-    // ═════════════════════════════════════════════
     public void resolveTicket(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  RESOLVE TICKET");
@@ -228,9 +171,7 @@ public class HelpDesk {
         System.out.println("  Pending tickets remaining: " + pendingHeap.size());
     }
 
-    // ═════════════════════════════════════════════
     //  ESCALATE TICKET  (admin)
-    // ═════════════════════════════════════════════
     public void escalateTicket(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  ESCALATE TICKET PRIORITY");
@@ -255,9 +196,7 @@ public class HelpDesk {
                 + " → [" + ticket.getPriority() + "] " + ticket.getPriorityLabel());
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY PENDING TICKETS  (admin)
-    // ═════════════════════════════════════════════
     public void displayPendingTickets() {
         System.out.println("\n" + BORDER);
         System.out.println("  PENDING TICKETS  (" + pendingHeap.size() + " total)");
@@ -285,9 +224,7 @@ public class HelpDesk {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  DISPLAY RESOLVED TICKETS  (admin)
-    // ═════════════════════════════════════════════
     public void displayResolvedTickets() {
         System.out.println("\n" + BORDER);
         System.out.println("  RESOLVED TICKETS  (" + resolvedTable.size() + " total)");
@@ -313,9 +250,8 @@ public class HelpDesk {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
+
     //  DISPLAY ALL TICKETS  (admin)
-    // ═════════════════════════════════════════════
     public void displayAllTickets() {
         int total = allTickets.size();
         System.out.println("\n" + BORDER);
@@ -342,9 +278,8 @@ public class HelpDesk {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  CHECK TICKET STATUS  (student)
-    // ═════════════════════════════════════════════
+
     public void checkTicketStatus(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  CHECK TICKET STATUS");
@@ -368,9 +303,7 @@ public class HelpDesk {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  STATISTICS  (admin)
-    // ═════════════════════════════════════════════
     public void displayStatistics() {
         System.out.println("\n" + BORDER);
         System.out.println("  HELP DESK STATISTICS");
@@ -434,10 +367,7 @@ public class HelpDesk {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  PRIVATE HELPERS
-    // ═════════════════════════════════════════════
-
     private void printTicketTableHeader() {
         System.out.printf("  %-8s %-10s %-14s %-16s %-12s %-10s %s%n",
                 "ID", "Student", "Category", "Description", "Priority", "Level", "Status");

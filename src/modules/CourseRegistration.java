@@ -6,39 +6,6 @@ import models.Course;
 
 import java.util.Scanner;
 
-/**
- * COURSE REGISTRATION MODULE
- *
- * Manages all course data and prerequisite relationships.
- *
- * Data structures used:
- *   CustomGraph      — models prerequisite relationships between courses
- *                      Each course is a VERTEX; each prerequisite link is
- *                      a DIRECTED EDGE:  CS101 ──► CS201
- *                      (CS101 is a prerequisite of CS201)
- *
- *   CustomHashTable  — stores Course objects keyed by courseCode
- *                      for O(1) average lookup when we need course details
- *
- * Why two structures?
- *   The graph is excellent for traversal (find all prereqs, detect cycles,
- *   topological sort) but it only stores course CODES as vertices.
- *   The hash table lets us instantly retrieve full Course details
- *   from any code the graph gives us.
- *
- * Public API (called by Main.java):
- *   addCourse(scanner)           — admin: add a new course
- *   removeCourse(scanner)        — admin: remove a course
- *   addPrerequisite(scanner)     — admin: link two courses
- *   removePrerequisite(scanner)  — admin: remove a prereq link
- *   updateCourse(scanner)        — admin: edit course details
- *   displayAllCourses()          — both: list every course
- *   showPrerequisites(scanner)   — both: show prereqs of a course
- *   showFullGraph()              — admin: print adjacency list
- *   showStudyOrder()             — both: topological sort
- *   registerForCourse(scanner)   — student: enrol in a course
- *   withdrawFromCourse(scanner)  — student: drop a course
- */
 public class CourseRegistration {
 
     //  Storage
@@ -58,35 +25,55 @@ public class CourseRegistration {
     //harded code the value
     private void seedDemoData() {
         // ── Computer Science courses ──
-//        addCourseInternal(new Course(null,null,0,null,null,0,null,null));
-        addCourseInternal(new Course("CS102", "Computer Architecture",             15, "Computer Science", "Semester 1", 100, "Dr. Nkosi",    "Hardware organisation and assembly language."));
-//        addCourseInternal(new Course("CS201", "Data Structures & Algorithms",      15, "Computer Science", "Semester 2", 90,  "Dr. Sithole",  "Arrays, linked lists, trees, graphs, sorting."));
-//        addCourseInternal(new Course("CS201", "Data Structures & Algorithms",      15, "Computer Science", "Semester 2", 90,  "Dr. Sithole",  "Arrays, linked lists, trees, graphs, sorting."));
-//        addCourseInternal(new Course("CS202", "Object-Oriented Programming",       15, "Computer Science", "Semester 2", 90,  "Dr. Mokoena", "OOP principles: encapsulation, inheritance, polymorphism."));
-//        addCourseInternal(new Course("CS301", "Database Systems",                  15, "Computer Science", "Semester 1", 80,  "Dr. Zulu",    "Relational model, SQL, transactions, indexing."));
-//        addCourseInternal(new Course("CS302", "Operating Systems",                 15, "Computer Science", "Semester 1", 80,  "Dr. Dlamini", "Processes, memory management, file systems."));
-//        addCourseInternal(new Course("CS401", "Software Engineering",              15, "Computer Science", "Semester 2", 70,  "Dr. Nkosi",   "SDLC, design patterns, testing, project management."));
-//        addCourseInternal(new Course("CS402", "Artificial Intelligence",           15, "Computer Science", "Semester 2", 60,  "Dr. Sithole", "Search, knowledge representation, machine learning."));
+        addCourseInternal(new Course(
+                "SCOA021",
+                "Computer Architecture",
+                28,
+                "Computer Science",
+                "Semester 2",
+                200,
+                "Shikwambana and others",
+                "Hardware organisation and assembly language."
+        ));
+        addCourseInternal(new Course(
+                "SCSC011",
+                "Algorithims",
+                18,
+                "Computer Science",
+                "1",
+                250,
+                "Malaji",
+                "Algorihms and DB"
+
+        ));
 
         // ── Mathematics courses ──
-//        addCourseInternal(new Course("MAT101", "Calculus I",                       15, "Mathematics", "Semester 1", 150, "Prof. Adams",  "Limits, derivatives, and integration."));
-//        addCourseInternal(new Course("MAT102", "Discrete Mathematics",             15, "Mathematics", "Semester 1", 130, "Prof. Brown",  "Logic, sets, relations, graph theory, combinatorics."));
-//        addCourseInternal(new Course("MAT201", "Calculus II",                      15, "Mathematics", "Semester 2", 120, "Prof. Adams",  "Multivariable calculus and series."));
-//        addCourseInternal(new Course("MAT202", "Linear Algebra",                   15, "Mathematics", "Semester 2", 110, "Prof. Brown",  "Vectors, matrices, eigenvalues, linear transformations."));
+        addCourseInternal(new Course(
+                "SMTA021",
+                "Calculus II",
+                15,
+                "Mathematics",
+                "Semester 1",
+                150,
+                "Prof. Olela",
+                "Sequences , Multiple , Vectors"
+        ));
+        addCourseInternal(new Course(
+                "SMTH011",
+                "Calculus I",
+                15,
+                "Mathematics",
+                "Semester 1",
+                150,
+                "Malatji",
+                "Limits , integral"
+        ));
 
-        // ── Prerequisite edges:  A ──► B  means A is prereq of B ──
-//        graph.addEdge("CS101",  "CS201");    // CS101  ──► CS201
-//        graph.addEdge("CS101",  "CS202");    // CS101  ──► CS202
-//        graph.addEdge("CS102",  "CS302");    // CS102  ──► CS302
-//        graph.addEdge("CS201",  "CS301");    // CS201  ──► CS301
-//        graph.addEdge("CS201",  "CS302");    // CS201  ──► CS302
-//        graph.addEdge("CS201",  "CS402");    // CS201  ──► CS402
-//        graph.addEdge("CS202",  "CS401");    // CS202  ──► CS401
-//        graph.addEdge("CS301",  "CS401");    // CS301  ──► CS401
-//        graph.addEdge("MAT101", "MAT201");   // MAT101 ──► MAT201
-//        graph.addEdge("MAT102", "CS201");    // MAT102 ──► CS201
-//        graph.addEdge("MAT102", "MAT202");   // MAT102 ──► MAT202
-//        graph.addEdge("MAT201", "MAT202");   // MAT201 ──► MAT202
+        graph.addEdge("SMTH011",  "SMTA021");
+        graph.addEdge("SCSC011",  "SCOA021");
+        graph.addEdge("SMTH011" , "SCOA021");
+
+
     }
 
     /** Internal helper — adds course to both structures. */
@@ -111,7 +98,7 @@ public class CourseRegistration {
         int credits  = readInt(scanner, "Credits (e.g. 15)", 1, 30);
         String dept  = prompt(scanner, "Department");
         String sem   = prompt(scanner, "Semester (e.g. Semester 1)");
-        int cap      = readInt(scanner, "Capacity (max students)", 1, 1000);
+        int cap      = readInt(scanner, "Capacity", 1, 1000);
         String lect  = prompt(scanner, "Lecturer name");
         String desc  = prompt(scanner, "Short description");
 
@@ -370,8 +357,6 @@ public class CourseRegistration {
         printSuccess("Successfully registered for: " + code + " — " + c.getCourseName());
         System.out.println("  Slots remaining: " + c.getAvailableSlots());
     }
-
-
     //  WITHDRAW FROM A COURSE  (student)
     public void withdrawFromCourse(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
@@ -394,7 +379,6 @@ public class CourseRegistration {
             System.out.println("  Withdrawal cancelled.");
         }
     }
-
 
     //  SEARCH COURSE  (both)
     public void searchCourse(Scanner scanner) {

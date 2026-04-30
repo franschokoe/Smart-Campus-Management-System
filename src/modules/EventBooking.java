@@ -6,57 +6,10 @@ import models.Event;
 
 import java.util.Scanner;
 
-/**
- * EVENT BOOKING MODULE
- *
- * Manages all campus events and student bookings.
- *
- * ─────────────────────────────────────────────────────────────
- *  Data Structures Used
- * ─────────────────────────────────────────────────────────────
- *
- *  CustomArrayList<Event>  (eventList)
- *    Stores all Event objects in insertion order.
- *    Used for listing, iterating, and displaying events.
- *    add()  O(1) amortised — new events added fast.
- *    get(i) O(1)           — direct index access for display.
- *    Why ArrayList? Events are mostly added and read, rarely
- *    deleted. A resizable array is the most natural fit.
- *
- *  CustomHashTable<String, Event>  (eventIndex)
- *    Key   : eventId  (e.g. "EVT001")
- *    Value : Event object
- *    Why   : O(1) average lookup when a student books or cancels
- *            by event ID — much faster than scanning the list.
- *
- *  CustomHashTable<String, CustomArrayList<String>>  (studentBookings)
- *    Key   : studentId
- *    Value : list of eventIds the student has booked
- *    Why   : O(1) lookup of "what events has this student booked?"
- *            without scanning every event's attendee list.
- *
- * ─────────────────────────────────────────────────────────────
- *  Public API  (called by Main.java)
- * ─────────────────────────────────────────────────────────────
- *  Admin:
- *    createEvent(scanner)          — add a new event
- *    cancelEvent(scanner)          — cancel an entire event
- *    updateEvent(scanner)          — edit event details
- *    displayAllEvents()            — list every event
- *    displayEventAttendees(scanner)— show who booked an event
- *    displayStatistics()           — event and booking summary
- *
- *  Student:
- *    bookEvent(scanner)            — book a spot at an event
- *    cancelMyBooking(scanner)      — cancel their own booking
- *    myBookings(scanner)           — list events they booked
- *    displayAllEvents()            — view upcoming events
- */
 public class EventBooking {
 
-    // ─────────────────────────────────────────────
+
     //  Storage
-    // ─────────────────────────────────────────────
     private final CustomArrayList<Event>                              eventList;
     private final CustomHashTable<String, Event>                      eventIndex;
     private final CustomHashTable<String, CustomArrayList<String>>    studentBookings;
@@ -64,9 +17,7 @@ public class EventBooking {
     private static final String BORDER      = "=".repeat(60);
     private static final String THIN_BORDER = "-".repeat(60);
 
-    // ─────────────────────────────────────────────
     //  Constructor
-    // ─────────────────────────────────────────────
     public EventBooking() {
         eventList       = new CustomArrayList<>();
         eventIndex      = new CustomHashTable<>(16);
@@ -74,25 +25,41 @@ public class EventBooking {
         seedDemoData();
     }
 
-    // ─────────────────────────────────────────────
-    //  Demo data
-    // ─────────────────────────────────────────────
-    private void seedDemoData() {
-        addEventInternal(new Event("Annual Tech Expo",          "Academic",  "Main Hall",        "2025-09-15", "09:00", 200, "Dr. Sithole",  "Showcasing student tech projects and innovations."));
-        addEventInternal(new Event("Welcome Back Braai",        "Social",    "Campus Grounds",   "2025-09-20", "12:00", 300, "SRC",          "Annual welcome braai for all returning students."));
-        addEventInternal(new Event("Career Fair 2025",          "Academic",  "Sports Centre",    "2025-09-25", "08:00", 500, "Career Office", "Meet top employers from across South Africa."));
-        addEventInternal(new Event("Inter-Res Football",        "Sports",    "Campus Stadium",   "2025-10-02", "14:00", 800, "Sports Dept",  "Annual inter-residence football tournament."));
-        addEventInternal(new Event("Mental Health Awareness",   "Wellness",  "Lecture Hall B3",  "2025-10-05", "10:00", 100, "Counselling",  "Panel discussion on student mental wellbeing."));
-        addEventInternal(new Event("Java Programming Workshop", "Academic",  "Computer Lab 2",   "2025-10-10", "13:00", 40,  "CS Department","Hands-on Java workshop for first-year students."));
-        addEventInternal(new Event("Cultural Night",            "Social",    "Great Hall",       "2025-10-18", "18:00", 400, "SRC",          "Celebrating the diversity of campus cultures."));
-        addEventInternal(new Event("Graduation Ceremony",       "Academic",  "Auditorium",       "2025-11-28", "09:00", 600, "Registrar",    "Graduation ceremony for Class of 2025."));
 
-        // Seed some bookings
-        bookInternal("EVT001", "S001");
-        bookInternal("EVT001", "S002");
-        bookInternal("EVT002", "S001");
-        bookInternal("EVT003", "S003");
-        bookInternal("EVT006", "S005");
+    //  Demo data
+    private void seedDemoData() {
+        addEventInternal(new Event(
+                "Welcome Bash 2026",
+                "Entertainment",
+                "Pond",
+                "2026-02-14",
+                "18:00",
+                5000,
+                "SRC",
+                "Welcoming returning studentsa"
+        ));
+        addEventInternal(new Event(
+                "Freshers Bash 2026",
+                "Entertainment",
+                "Pond",
+                "2026-03-25",
+                "18:00",
+                11000,
+                "SRC-EFF",
+                "Showing the freshers the university culture and crowniing Mr/Mrs UL"
+        ));
+
+        addEventInternal(new Event(
+                "Pens down Bash 2026",
+                "Entertainment",
+                "Pond",
+                "2026-11-17",
+                "18:00",
+                19000,
+                "SRC",
+                "Celebrating the finishing exams of the academic year"
+        ));
+
     }
 
     /** Internal — adds an event to both list and index. */
@@ -115,9 +82,7 @@ public class EventBooking {
         return true;
     }
 
-    // ═════════════════════════════════════════════
     //  CREATE EVENT  (admin)
-    // ═════════════════════════════════════════════
     public void createEvent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  CREATE NEW EVENT");
@@ -128,7 +93,7 @@ public class EventBooking {
         String venue = prompt(scanner, "Venue");
         String date  = prompt(scanner, "Date (YYYY-MM-DD)");
         String time  = prompt(scanner, "Time (HH:MM)");
-        int    cap   = readInt(scanner, "Capacity (max attendees)", 1, 2000);
+        int    cap   = readInt(scanner, "Capacity", 1, 22000);
         String org   = prompt(scanner, "Organiser");
         String desc  = prompt(scanner, "Short Description");
 
@@ -139,9 +104,7 @@ public class EventBooking {
         event.display();
     }
 
-    // ═════════════════════════════════════════════
     //  CANCEL EVENT  (admin)
-    // ═════════════════════════════════════════════
     public void cancelEvent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  CANCEL EVENT");
@@ -154,7 +117,7 @@ public class EventBooking {
         if (event.isCancelled())  { printError("Event '" + eventId + "' is already cancelled."); return; }
 
         event.display();
-        System.out.println("  ⚠  This will cancel bookings for "
+        System.out.println(" This will cancel bookings for "
                 + event.getAttendeeCount() + " student(s).");
 
         String confirm = prompt(scanner, "Confirm cancellation? (yes/no)");
@@ -167,9 +130,8 @@ public class EventBooking {
         }
     }
 
-    // ═════════════════════════════════════════════
+
     //  UPDATE EVENT  (admin)
-    // ═════════════════════════════════════════════
     public void updateEvent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  UPDATE EVENT");
@@ -202,9 +164,8 @@ public class EventBooking {
         }
     }
 
-    // ═════════════════════════════════════════════
+
     //  DISPLAY ALL EVENTS  (both roles)
-    // ═════════════════════════════════════════════
     public void displayAllEvents() {
         System.out.println("\n" + BORDER);
         System.out.println("  ALL EVENTS  (" + eventList.size() + " total)");
@@ -227,10 +188,7 @@ public class EventBooking {
         System.out.println("  Total events: " + eventList.size());
         System.out.println(BORDER);
     }
-
-    // ═════════════════════════════════════════════
     //  DISPLAY EVENT ATTENDEES  (admin)
-    // ═════════════════════════════════════════════
     public void displayEventAttendees(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  VIEW EVENT ATTENDEES");
@@ -262,9 +220,7 @@ public class EventBooking {
         System.out.println(THIN_BORDER);
     }
 
-    // ═════════════════════════════════════════════
-    //  BOOK EVENT  (student)
-    // ═════════════════════════════════════════════
+    //  BOOK EVENT  (student
     public void bookEvent(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  BOOK AN EVENT");
@@ -300,15 +256,15 @@ public class EventBooking {
         }
     }
 
-    // ═════════════════════════════════════════════
+
     //  CANCEL MY BOOKING  (student)
-    // ═════════════════════════════════════════════
+
     public void cancelMyBooking(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  CANCEL MY BOOKING");
         System.out.println(THIN_BORDER);
 
-        String studentId = prompt(scanner, "Your Student ID").toUpperCase();
+        String studentId = prompt(scanner, "Your Student Number").toUpperCase();
         String eventId   = prompt(scanner, "Event ID to cancel").toUpperCase();
 
         Event event = eventIndex.get(eventId);
@@ -336,15 +292,13 @@ public class EventBooking {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  MY BOOKINGS  (student)
-    // ═════════════════════════════════════════════
     public void myBookings(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  MY EVENT BOOKINGS");
         System.out.println(THIN_BORDER);
 
-        String studentId = prompt(scanner, "Your Student ID").toUpperCase();
+        String studentId = prompt(scanner, "Your Student No.").toUpperCase();
 
         CustomArrayList<String> bookings = studentBookings.get(studentId);
 
@@ -369,9 +323,7 @@ public class EventBooking {
         System.out.println(THIN_BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  SEARCH EVENTS  (both)
-    // ═════════════════════════════════════════════
     public void searchEvents(Scanner scanner) {
         System.out.println("\n" + THIN_BORDER);
         System.out.println("  SEARCH EVENTS");
@@ -428,9 +380,8 @@ public class EventBooking {
         }
     }
 
-    // ═════════════════════════════════════════════
     //  STATISTICS  (admin)
-    // ═════════════════════════════════════════════
+
     public void displayStatistics() {
         System.out.println("\n" + BORDER);
         System.out.println("  EVENT BOOKING STATISTICS");
@@ -474,10 +425,7 @@ public class EventBooking {
         System.out.println(BORDER);
     }
 
-    // ═════════════════════════════════════════════
     //  PRIVATE HELPERS
-    // ═════════════════════════════════════════════
-
     private void printEventTableHeader() {
         System.out.printf("  %-8s %-28s %-12s %-12s %-11s %-7s %s%n",
                 "ID", "Name", "Category", "Venue", "Date", "Booked", "Status");
