@@ -1,12 +1,7 @@
 package models;
 
 /**
- * Represents a campus event in the Smart Campus system.
- *
- * An Event is the data object stored inside the CustomArrayList.
- * Each event tracks its own attendee list as a fixed-size array
- * of student IDs — capacity is set when the event is created.
- *
+
  * Fields:
  *   eventId      — unique ID,        e.g. "EVT001"
  *   eventName    — full name,        e.g. "Annual Tech Expo"
@@ -23,9 +18,6 @@ package models;
  */
 public class Event {
 
-    // ─────────────────────────────────────────────
-    //  Fields
-    // ─────────────────────────────────────────────
     private String   eventId;
     private String   eventName;
     private String   category;
@@ -39,14 +31,13 @@ public class Event {
     private int      attendeeCount;
     private String   status;         // Open | Full | Cancelled
 
-    // ─────────────────────────────────────────────
+
     //  Static counter for auto-generating event IDs
-    // ─────────────────────────────────────────────
+
     private static int counter = 1;
 
-    // ─────────────────────────────────────────────
+
     //  Constructor
-    // ─────────────────────────────────────────────
     public Event(String eventName,
                  String category,
                  String venue,
@@ -70,7 +61,7 @@ public class Event {
     }
 
 
-    //  Getters
+
 
     public String   getEventId()       { return eventId;                      }
     public String   getEventName()     { return eventName;                    }
@@ -88,9 +79,8 @@ public class Event {
     public boolean  isCancelled()      { return "Cancelled".equals(status);  }
     public boolean  isOpen()           { return "Open".equals(status);       }
 
-    // ─────────────────────────────────────────────
+
     //  Setters
-    // ─────────────────────────────────────────────
     public void setEventName(String v)   { this.eventName   = v; }
     public void setVenue(String v)       { this.venue       = v; }
     public void setDate(String v)        { this.date        = v; }
@@ -98,10 +88,7 @@ public class Event {
     public void setOrganiser(String v)   { this.organiser   = v; }
     public void setDescription(String v) { this.description = v; }
     public void setStatus(String v)      { this.status      = v; }
-
-    // ─────────────────────────────────────────────
     //  Booking operations
-    // ─────────────────────────────────────────────
 
     /**
      * Books a spot for a student.
@@ -137,9 +124,6 @@ public class Event {
         return false;
     }
 
-    /**
-     * Returns true if the student has already booked this event.
-     */
     public boolean hasBooked(String studentId) {
         for (int i = 0; i < attendeeCount; i++) {
             if (attendees[i].equals(studentId)) return true;
@@ -147,9 +131,6 @@ public class Event {
         return false;
     }
 
-    /**
-     * Returns a copy of the attendee array (only filled slots).
-     */
     public String[] getAttendees() {
         String[] copy = new String[attendeeCount];
         System.arraycopy(attendees, 0, copy, 0, attendeeCount);
@@ -159,9 +140,9 @@ public class Event {
     /** Cancels the entire event. */
     public void cancel() { this.status = "Cancelled"; }
 
-    // ─────────────────────────────────────────────
+
     //  Display
-    // ─────────────────────────────────────────────
+
 
     /** Full formatted event card. */
     public void display() {

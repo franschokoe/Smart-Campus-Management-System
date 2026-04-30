@@ -224,8 +224,8 @@ public class StudentRegistry {
             return;
         }
 
-        String firstName = prompt(scanner, "First Name");
-        String lastName  = prompt(scanner, "Last Name");
+        String firstName = prompt(scanner, "Full Name");
+        String lastName  = prompt(scanner, "Surname");
         String email     = prompt(scanner, "Email Address");
         String phone     = prompt(scanner, "Phone Number");
         String programme = prompt(scanner, "Degree (e.g. BSc Computer Science)");

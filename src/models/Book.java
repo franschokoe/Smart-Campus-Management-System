@@ -21,10 +21,7 @@ package models;
  *   status        — Available | Borrowed | Reserved | Lost
  */
 public class Book {
-
-    // ─────────────────────────────────────────────
     //  Fields
-    // ─────────────────────────────────────────────
     private String isbn;
     private String title;
     private String author;
@@ -39,9 +36,7 @@ public class Book {
     private String dateDue;          // null when available
     private String status;           // Available | Borrowed | Reserved | Lost
 
-    // ─────────────────────────────────────────────
     //  Constructor
-    // ─────────────────────────────────────────────
     public Book(String isbn,
                 String title,
                 String author,
@@ -64,9 +59,8 @@ public class Book {
         this.status          = "Available";
     }
 
-    // ─────────────────────────────────────────────
+
     //  Getters
-    // ─────────────────────────────────────────────
     public String getIsbn()             { return isbn;             }
     public String getTitle()            { return title;            }
     public String getAuthor()           { return author;           }
@@ -85,9 +79,9 @@ public class Book {
     public boolean isBorrowed()         { return "Borrowed".equals(status);  }
     public boolean isLost()             { return "Lost".equals(status);      }
 
-    // ─────────────────────────────────────────────
+
     //  Setters
-    // ─────────────────────────────────────────────
+
     public void setTitle(String title)           { this.title         = title;       }
     public void setAuthor(String author)         { this.author        = author;      }
     public void setGenre(String genre)           { this.genre         = genre;       }
@@ -96,9 +90,8 @@ public class Book {
     public void setTotalCopies(int copies)       { this.totalCopies   = copies;      }
     public void setStatus(String status)         { this.status        = status;      }
 
-    // ─────────────────────────────────────────────
+
     //  Borrow / Return operations
-    // ─────────────────────────────────────────────
 
     /**
      * Records a borrow transaction.
@@ -141,10 +134,8 @@ public class Book {
         if (totalCopies == 0) this.status = "Lost";
     }
 
-    // ─────────────────────────────────────────────
-    //  Display
-    // ─────────────────────────────────────────────
 
+    //  Display
     /** Full formatted book card. */
     public void display() {
         String thin = "-".repeat(54);

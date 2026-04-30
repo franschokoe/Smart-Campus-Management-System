@@ -1,12 +1,6 @@
 package models;
 
 /**
- * Represents a help desk ticket in the Smart Campus system.
- *
- * A Ticket is the data object stored inside the CustomMinHeap.
- * The heap orders tickets by priority so the most urgent ones
- * are always processed first.
- *
  * Priority levels (lower number = higher urgency):
  *   1 — Critical  (system down, safety issue)
  *   2 — High      (blocking academic work)
@@ -18,9 +12,8 @@ package models;
  */
 public class Ticket implements Comparable<Ticket> {
 
-    // ─────────────────────────────────────────────
     //  Fields
-    // ─────────────────────────────────────────────
+
     private String ticketId;       // unique ID,   e.g. "TKT001"
     private String studentId;      // who raised it
     private String studentName;    // name of the student
@@ -32,14 +25,12 @@ public class Ticket implements Comparable<Ticket> {
     private String dateResolved;   // null until resolved
     private String resolutionNote; // admin notes when closing ticket
 
-    // ─────────────────────────────────────────────
-    //  Static counter for auto-generating ticket IDs
-    // ─────────────────────────────────────────────
+
     private static int counter = 1;
 
-    // ─────────────────────────────────────────────
+
     //  Constructor
-    // ─────────────────────────────────────────────
+
     public Ticket(String studentId,
                   String studentName,
                   String category,
@@ -58,9 +49,8 @@ public class Ticket implements Comparable<Ticket> {
         this.resolutionNote = null;
     }
 
-    // ─────────────────────────────────────────────
     //  Getters
-    // ─────────────────────────────────────────────
+
     public String getTicketId()       { return ticketId;       }
     public String getStudentId()      { return studentId;      }
     public String getStudentName()    { return studentName;    }
@@ -83,9 +73,9 @@ public class Ticket implements Comparable<Ticket> {
         };
     }
 
-    // ─────────────────────────────────────────────
+
     //  Setters / state transitions
-    // ─────────────────────────────────────────────
+
     public void setStatus(String status)             { this.status         = status;         }
     public void setDateResolved(String date)         { this.dateResolved   = date;           }
     public void setResolutionNote(String note)       { this.resolutionNote = note;           }
@@ -107,9 +97,6 @@ public class Ticket implements Comparable<Ticket> {
     public boolean isOpen()       { return "Open".equals(status);        }
     public boolean isInProgress() { return "In Progress".equals(status); }
 
-    // ─────────────────────────────────────────────
-    //  Comparable — used by the MinHeap to compare
-    // ─────────────────────────────────────────────
 
     /**
      * Lower priority number = higher urgency = comes FIRST in the heap.
@@ -124,9 +111,7 @@ public class Ticket implements Comparable<Ticket> {
         return Integer.compare(this.priority, other.priority);
     }
 
-    // ─────────────────────────────────────────────
-    //  Display
-    // ─────────────────────────────────────────────
+
 
     /** Full formatted ticket card. */
     public void display() {
