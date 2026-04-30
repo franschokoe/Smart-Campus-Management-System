@@ -193,25 +193,29 @@ public class Menu {
             System.out.println("\n" + BORDER);
             System.out.println("           STUDENT RECORDS");
             System.out.println(THIN_BORDER);
-
+            //added update
             if (isAdmin) {
                 System.out.println("  1. Add Student");
                 System.out.println("  2. Search Student");
                 System.out.println("  3. Delete Student");
-                System.out.println("  4. Display All Students");
-                System.out.println("  5. Back");
+                System.out.println("  4. Update Student");
+                System.out.println("  5. Display All Students");
+                System.out.println("  6. View Campus Analytics");
+                System.out.println("  7. Back");
             }
 
             System.out.println(BORDER);
             int choice = readInt("Enter choice: ");
-
+//            added update
             if (isAdmin) {
                 switch (choice) {
                     case 1 -> studentRegistry.addStudent(scanner);
                     case 2 -> studentRegistry.searchStudent(scanner);
                     case 3 -> studentRegistry.deleteStudent(scanner);
-                    case 4 -> studentRegistry.displayAllStudents();
-                    case 5 -> active = false;
+                    case 4 -> studentRegistry.updateStudent(scanner);
+                    case 5 -> studentRegistry.displayAllStudents();
+                    case 6 -> studentRegistry.displayStatistics();
+                    case 7 -> active = false;
                     default -> printError("Invalid option.");
                 }
             } else {
