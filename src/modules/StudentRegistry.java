@@ -79,7 +79,7 @@ public class StudentRegistry {
                 "0712345678",
                 "Bachelor of Fire Fighter",
                 3, 1.5,
-                "Suspended"));
+                "Active"));
 
         table.put("202333658", new Student("202333658",
                 "B",
